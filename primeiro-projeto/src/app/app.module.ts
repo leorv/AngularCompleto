@@ -1,29 +1,22 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CursosModule } from './cursos/cursos.module';
 import { MeuPrimeiroComponent } from './meu-primeiro/meu-primeiro.component';
-import { MeuPrimeiro2Component } from './meu-primeiro2/meu-primeiro2.component';
-
-
-
+import { MeuSegundoComponent } from './meu-segundo/meu-segundo.component';
 
 @NgModule({
-  declarations: [ // Componentes, diretivas e pipes.
+  declarations: [
     AppComponent,
     MeuPrimeiroComponent,
-    MeuPrimeiro2Component
+    MeuSegundoComponent
   ],
-  imports: [ // Outros módulos
+  imports: [
     BrowserModule,
-    CursosModule,
     AppRoutingModule
   ],
-  providers: [], // Serviços que ficarão disponíveis.
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
