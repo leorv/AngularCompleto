@@ -1,0 +1,23 @@
+<section>
+
+    <article>
+        <h3>Interpolation</h3>
+        <p>{{ url }}</p>
+        <p>Resultado de 1 + 1 é: {{ 1 + 1 }}</p>
+        <p>Resultado de 1 + 1 não é: {{ 1 + 1 + getValor() }}</p>
+        <p>Curso Angular e gostou do curso: {{ cursoAngular && getCurtirCurso() }}</p>
+    </article>
+
+    <article>
+        <h3>Imagem usando interpolação:</h3>
+        <img src="{{ imgUrl }}" alt="imagem aleatória">
+    </article>
+
+    <article>
+        <h3>Imagem usando property binding:</h3>
+        <img [src]="imgUrl" alt="imagem aleatória">
+        <p>Como o Angular lê isso? Da maneira abaixo:</p>
+        <img bind-src="imgUrl" >
+    </article>
+
+</section>
