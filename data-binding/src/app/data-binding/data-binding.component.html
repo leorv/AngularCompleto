@@ -1,61 +1,40 @@
-<section>
-
-
+<section class="event-binding">
 
     <article>
-        <h3>Class e Style Binding</h3>
+        <h3>
+            Event Binding
+        </h3>
         <div>
-            Selecione uma classe:
-            <select #classe (change)="0">
-                <option value="alert-success">Sucesso</option>
-                <option value="alert-primary">Primário</option>
-                <option value="alert-secondary">Secundário</option>
-                <option value="alert-danger">Perigo</option>
-                <option value="alert-warning">Aviso</option>
-                <option value="alert-info">Informação</option>
-                <option value="alert-light">Claro</option>
-                <option value="alert-dark">Escuro</option>
-            </select>
+            <button class="btn btn-primary" (click)="botaoClicado()">
+                Me clique
+            </button>
+
+            <br><br>
+
+            <!-- Escutar o evento quando o usuário aperta enter: keyup.enter
+                (keyup.enter)="salvarValor($event.target.value)
+
+            Escutar o evento quando o campo perde o foco: blur
+        
+            Outra maneira é utilizando o jogo da velha e o nome da variável, exemplo #campoInput,
+            é a mesmo que acessar o event.target.
+            (blur)="salvarValor(campoInput.value)
+            -->
+
+            <input type="text" (keyup)="onkeyup($event)" (keyup.enter)="salvarValor(campoInput.value)"
+            (blur)="salvarValor(campoInput.value)"
+            #campoInput>
+            <p>Valor atual digitado: {{ valorAtual }}</p>
+            <p>Valor salva após teclar ENTER: {{ valorSalvo }}</p>
+
+            <br>
+            <span (mouseover)="onMouseOverOut()" (mouseout)="onMouseOverOut()"
+            [class.highlight]="isMouseOver">Passe o mouse sobre mim.</span>
+
         </div>
+
     </article>
 
-    <br>
-    <div class="alert" role="alert" [class.alert-primary]="classe.value == 'alert-primary'">
-        A simple primary alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
-    </div>
-    <div class="alert" role="alert" [class.alert-secondary]="classe.value == 'alert-secondary'">
-        A simple secondary alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
-    </div>
-    <div class="alert" role="alert" [class.alert-success]="classe.value == 'alert-success'">
-        A simple success alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
-    </div>
-    <div class="alert" role="alert" [class.alert-danger]="classe.value == 'alert-danger'">
-        A simple danger alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
-    </div>
-    <div class="alert" role="alert" [class.alert-warning]="classe.value == 'alert-warning'">
-        A simple warning alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
-    </div>
-    <div class="alert" role="alert" [class.alert-info]="classe.value == 'alert-info'">
-        A simple info alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
-    </div>
-    <div class="alert" role="alert" [class.alert-light]="classe.value == 'alert-light'">
-        A simple light alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
-    </div>
-    <div class="alert" role="alert" [class.alert-dark]="classe.value == 'alert-dark'">
-        A simple dark alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
-    </div>
-
-    <hr>
-
-    <div class="alert {{ classe.value }}" role="alert">
-        Texto colorido conforme o combo box.
-    </div>
-
-    <hr>
-
-    <div class="alert alert-danger" role="alert" [style.display]="classe.value == 'alert-danger' ? 'block' : 'none'">
-        Esse texto só aparece em caso de erro.
-    </div>
 
 
 </section>
