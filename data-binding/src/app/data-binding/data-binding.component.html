@@ -1,40 +1,56 @@
-<section class="event-binding">
-
+<section class="two-way-databinding">
     <article>
-        <h3>
-            Event Binding
-        </h3>
+        <h3>Two Way Data-Binding</h3>
+
+        <!-- 
+            USAR FORMSMODULE NO APP MODULE
+
+        Uma maneira trabalhosa de atualizar via dupla:    
         <div>
-            <button class="btn btn-primary" (click)="botaoClicado()">
-                Me clique
-            </button>
+            <input type="text" 
+                [value]="nome"
+                (input)="atualizaNome($event)"
+                />
+        </div>
+        <p>Você digitou o nome: {{ nome }}</p> -->
 
-            <br><br>
+        <div>
+            <input type="text" 
+                [ngModel]="nome"
+                (ngModelChange)="nome = $event"
+                />
+        </div>
+        <p>Você digitou o nome: {{ nome }}</p>
 
-            <!-- Escutar o evento quando o usuário aperta enter: keyup.enter
-                (keyup.enter)="salvarValor($event.target.value)
+        <div>
+            <input type="text" [(ngModel)]="nome">
+            <p>Você digitou o nome: {{ nome }}</p>
+        </div>
 
-            Escutar o evento quando o campo perde o foco: blur
+        <!-- Forma canônica bind-nome da propriedade
+        evento: on-nome do evento
+    
+        two way -> bindon-nome da propriedade 
+        -->
+
+        <div>
+            <input type="text" bindon-ngModel="nome">
+            <p>Você digitou o nome: {{ nome }}</p>
+        </div>
         
-            Outra maneira é utilizando o jogo da velha e o nome da variável, exemplo #campoInput,
-            é a mesmo que acessar o event.target.
-            (blur)="salvarValor(campoInput.value)
-            -->
-
-            <input type="text" (keyup)="onkeyup($event)" (keyup.enter)="salvarValor(campoInput.value)"
-            (blur)="salvarValor(campoInput.value)"
-            #campoInput>
-            <p>Valor atual digitado: {{ valorAtual }}</p>
-            <p>Valor salva após teclar ENTER: {{ valorSalvo }}</p>
-
+        <div>
+            <p>Nome</p>
+            <input type="text" [(ngModel)]="pessoa.nome">
+            <p>Idade</p>
+            <input type="text" [(ngModel)]="pessoa.idade">
             <br>
-            <span (mouseover)="onMouseOverOut()" (mouseout)="onMouseOverOut()"
-            [class.highlight]="isMouseOver">Passe o mouse sobre mim.</span>
+            <p>Meu nome é {{ pessoa.nome }}</p>
+            <p>Minha idade é {{ pessoa.idade }}</p>
 
         </div>
 
+
+
+
     </article>
-
-
-
 </section>
