@@ -5,6 +5,15 @@
         <!-- 
             USAR FORMSMODULE NO APP MODULE
 
+        Uma maneira trabalhosa de atualizar via dupla: 
+        <div>
+            <input type="text" 
+                [value]="nome"
+                (input)="$event.target.value"
+                />
+        </div>
+        <p>Você digitou o nome: {{ nome }}</p>
+
         Uma maneira trabalhosa de atualizar via dupla:    
         <div>
             <input type="text" 
@@ -14,6 +23,8 @@
         </div>
         <p>Você digitou o nome: {{ nome }}</p> -->
 
+        
+        <!-- No ngModelChange, não precisamos do target.value, pois neste caso o Angular já sabe obter o valor do evento. -->
         <div>
             <input type="text" 
                 [ngModel]="nome"
@@ -27,10 +38,16 @@
             <p>Você digitou o nome: {{ nome }}</p>
         </div>
 
-        <!-- Forma canônica bind-nome da propriedade
-        evento: on-nome do evento
-    
-        two way -> bindon-nome da propriedade 
+        <!-- Forma canônica bind-nome da propriedade.
+            Ex: <img [src]="urlImagem">
+                <img bind-src="urlImagem">
+
+        Para evento: on-nome do evento
+        
+        Como estamos usando o bind e também o evento, fica a junção do bind e on.
+        two way -> bindon-nome da propriedade
+        Ex: <input type="text" [(ngModel)]="nome">
+            <input type="text" bindon-ngModel="nome">
         -->
 
         <div>
