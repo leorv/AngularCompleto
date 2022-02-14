@@ -24,6 +24,12 @@ export class DataBindingComponent implements OnInit {
         idade: 20
     }
 
+    valorInicial: number = 10;
+
+    onMudouValor(evento: any){
+        console.log(evento.novoValor);
+    }
+
     constructor() { }
 
     ngOnInit(): void {

@@ -1,6 +1,6 @@
-<section class="two-way-databinding">
+<!-- <section class="two-way-databinding">
     <article>
-        <h3>Two Way Data-Binding</h3>
+        <h3>Two Way Data-Binding</h3> -->
 
         <!-- 
             USAR FORMSMODULE NO APP MODULE
@@ -25,7 +25,7 @@
 
 
         <!-- No ngModelChange, não precisamos do target.value, pois neste caso o Angular já sabe obter o valor do evento. -->
-        <div>
+        <!-- <div>
             <input type="text" [ngModel]="nome" (ngModelChange)="nome = $event" />
         </div>
         <p>Você digitou o nome: {{ nome }}</p>
@@ -33,7 +33,7 @@
         <div>
             <input type="text" [(ngModel)]="nome">
             <p>Você digitou o nome: {{ nome }}</p>
-        </div>
+        </div> -->
 
         <!-- Forma canônica bind-nome da propriedade.
             Ex: <img [src]="urlImagem">
@@ -47,7 +47,7 @@
             <input type="text" bindon-ngModel="nome">
         -->
 
-        <div>
+        <!-- <div>
             <input type="text" bindon-ngModel="nome">
             <p>Você digitou o nome: {{ nome }}</p>
         </div>
@@ -63,12 +63,15 @@
 
         </div>
     </article>
-</section>
+</section> -->
 
 <section>
     <article>
         <h3>Input/Output Properties</h3>
         <app-curso [nome]="nomeDoCurso"></app-curso>
         <!-- Acima estamos passando um objeto ou variável do data-binding component para o input-property component-->
+
+        <!-- Note que abaixo estou passando um valor fixo, hard coded, então não preciso usar o property binding-->
+        <contador [valor]="valorInicial" (mudouValor)="onMudouValor($event)"></contador>
     </article>
 </section>
