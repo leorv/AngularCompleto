@@ -1,5 +1,16 @@
 # Diretivas
 
+## Comandos
+
+| Component | ng g component meu-componente  |
+|-----------|--------------------------------|
+| Service   | ng g service meu-servico       |
+| Directive | ng g directive minha-diretiva  |
+| Pipe      | ng g pipe meu-pipe             |
+| Class     | ng g class minha-classe        |
+| Interface | ng g interface minha-interface |
+| Enum      | ng g enum meu-enum             |
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.3.
 
 ## Development server
