@@ -33,3 +33,17 @@ ngIf é recomendado para árvores de elementos grandes.
 
 Porém, o hidden é muito menos custoso caso o custo para criar a árvore de
 elementos seja grande. -->
+
+<div *ngIf="mostrarCursos">
+    Lista de cursos aqui:
+</div>
+
+<!-- <template [ngIf]="mostrarCursos">
+    Lista de cursos aqui:
+</template> -->
+
+<h4>Usando o template ao invés do *</h4>
+
+<div template="ngIf mostrarCursos">
+    Lista de cursos aqui:
+</div>
