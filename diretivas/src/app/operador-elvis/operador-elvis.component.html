@@ -1,0 +1,5 @@
+<p>Tarefa: {{ tarefa.descricao }}</p>
+<p>Responsável: {{ tarefa.responsavel != null ? tarefa.responsavel.nome : ''}}</p>
+<p>Responsável: {{ tarefa.responsavel?.nome }}</p>
+
+<!-- Podemos usar o ? em mais propriedades aninhadas. Este é o operador elvis.-->
