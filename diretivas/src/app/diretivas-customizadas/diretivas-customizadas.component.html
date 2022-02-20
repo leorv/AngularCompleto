@@ -11,7 +11,26 @@
 <!-- <p highlight [defaultColor]="''" [highlightColor]="'blue'">
     Texto com highlight com cores customizadas.
 </p> -->
-<p>Abaixo a mesma coisa, porém com um código mais enxuto e usando o nome do Input Property igual o nome da diretiva.</p>
+<!-- <p>Abaixo a mesma coisa, porém com um código mais enxuto e usando o nome do Input Property igual o nome da diretiva.</p>
 <p [highlight]="'blue'" [defaultColor]="''">
     Texto com highlight com cores customizadas.
-</p>
+</p> -->
+
+<div *ngIf="mostrarCursos">
+    Lista de cursos aqui:
+</div>
+<div *ngElse="mostrarCursos">
+    Não existem cursos para serem listados.
+</div>
+
+<br>
+
+<button (click)="onMostrarCursos()">Mostrar cursos</button>
+
+<!--
+
+    Fazer isso nativamente:
+    
+    <div *ngIf="mostrarCursos; else naoMostrar">Lista de cursos aqui:{{ cursos }}</div>
+    <ng-template #naoMostrar>Não existem cursos para serem exibidos.</ng-template>
+-->
