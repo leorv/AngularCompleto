@@ -1,5 +1,6 @@
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,17 +15,20 @@ import { SettingsService } from './settings.service';
 // só funcionou adicionando as 3 linhas abaixo.
 import {registerLocaleData} from '@angular/common';
 import br from '@angular/common/locales/pt';
+import { FiltroArrayPipe } from './filtro-array.pipe';
 registerLocaleData(br, 'pt-BR');
 
 @NgModule({
     declarations: [
         AppComponent,
         ExemplosPipesComponent,
-        CamelCasePipe
+        CamelCasePipe,
+        FiltroArrayPipe
     ],
     imports: [
         BrowserModule,
-        AppRoutingModule
+        AppRoutingModule,
+        FormsModule
     ],
     providers: [
         // {

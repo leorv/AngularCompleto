@@ -6,6 +6,15 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./exemplos-pipes.component.css']
 })
 export class ExemplosPipesComponent implements OnInit {
+    livros: string[] = ['Java', 'Angular 12'];
+
+    filtro: string = '';
+
+    addCurso(value: string){
+        console.log('adicionando novo curso');
+        this.livros.push(value);
+    }
+
 
     livro: any =  {
         titulo: 'Estruturas de Dados e Algoritmos com JavaScript: Escreva um Código JavaScript Complexo e Eficaz Usando a Mais Recente ECMAScript',
@@ -20,5 +29,7 @@ export class ExemplosPipesComponent implements OnInit {
 
     ngOnInit(): void {
     }
+
+    
 
 }
