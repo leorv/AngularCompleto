@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { CriarCursoModule } from './criar-curso/criar-curso.module';
 import { CursosModule } from './cursos/cursos.module';
 
+import { LogService } from './shared/log.service';
+
 
 // import { CursosService } from './cursos/cursos.service';
 
@@ -20,9 +22,10 @@ import { CursosModule } from './cursos/cursos.module';
     CriarCursoModule,
     CursosModule
   ],
-//   providers: [
+providers: [
+    LogService
 //       CursosService
-//   ],
+   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
