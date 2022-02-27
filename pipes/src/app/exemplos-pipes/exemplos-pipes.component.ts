@@ -10,13 +10,28 @@ export class ExemplosPipesComponent implements OnInit {
 
     filtro: string = '';
 
-    addCurso(value: string){
+    addCurso(value: string) {
         console.log('adicionando novo curso');
         this.livros.push(value);
     }
 
+    obterCursos() {
+        if (this.livros.length === 0 || this.filtro === undefined || this.filtro.trim() === '') {
+            return this.livros;
+        }
 
-    livro: any =  {
+        return this.livros.filter(
+            (v) => {
+                if (v.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0) {
+                    return true;
+                }
+                return false;
+            }
+        );
+    }
+
+
+    livro: any = {
         titulo: 'Estruturas de Dados e Algoritmos com JavaScript: Escreva um Código JavaScript Complexo e Eficaz Usando a Mais Recente ECMAScript',
         rating: 4.54321,
         numeroPaginas: 408,
@@ -30,6 +45,6 @@ export class ExemplosPipesComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    
+
 
 }

@@ -21,9 +21,29 @@
 <h5>Pipe Puro</h5>
 
 <ul>
-    <!-- NÃO FAÇAM ISSO EM UM PROJETO REAL, APENAS PARA APRENDER AQUI,
-    NO PRÓXIMO COMMIT ESTÁ A COISA CERTA A SE FAZER -->
+    <!-- NÃO FAÇAM ISSO EM UM PROJETO REAL, APENAS PARA APRENDER AQUI -->
     <li *ngFor="let liv of livros | filtroArray:filtro">
         {{ liv }}
     </li>
 </ul>
+
+<h5>Pipe Impuro</h5>
+
+<ul>
+    <!-- NÃO FAÇAM ISSO EM UM PROJETO REAL, APENAS PARA APRENDER AQUI -->
+    <li *ngFor="let liv of livros | filtroArrayImpuro:filtro">
+        {{ liv }}
+    </li>
+</ul>
+
+<!-- NÃO DEVEMOS UTILIZAR PIPES PARA FAZER ORDER BY E NEM FILTROS NOS ARRAYS -->
+
+<h5>Maneira correta de usar filtros nos projetos</h5>
+
+<ul>
+    <!-- NÃO FAÇAM ISSO EM UM PROJETO REAL, APENAS PARA APRENDER AQUI -->
+    <li *ngFor="let liv of obterCursos()">
+        {{ liv }}
+    </li>
+</ul>
+
