@@ -1,19 +1,23 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+// Angular Material
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
-
+// Modules
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// Components
+import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { CursosComponent } from './cursos/cursos.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CursoDetalheComponent } from './curso-detalhe/curso-detalhe.component';
+// Services
+import { CursosService } from './cursos/cursos.service';
+import { CursoNaoEncontradoComponent } from './curso-nao-encontrado/curso-nao-encontrado.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +26,8 @@ import { CursoDetalheComponent } from './curso-detalhe/curso-detalhe.component';
     LoginComponent,
     CursosComponent,
     NavbarComponent,
-    CursoDetalheComponent
+    CursoDetalheComponent,
+    CursoNaoEncontradoComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +39,9 @@ import { CursoDetalheComponent } from './curso-detalhe/curso-detalhe.component';
     MatSidenavModule,
     MatListModule
   ],
-  providers: [],
+  providers: [
+      CursosService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
