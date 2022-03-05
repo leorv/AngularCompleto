@@ -24,6 +24,7 @@ export class CursoDetalheComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
+        console.log(this.route.params);
         this.inscricao = this.route.params.subscribe(
             (params: any) => {
                 this.id = params['id'];

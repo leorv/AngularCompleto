@@ -15,15 +15,17 @@
                 </i> Login
             </a>
             <!-- Apenas para constar, usando um CSS para deixar o link como ativo quando o usuário clicas, usar o routerLinkActive como abaixo apenas que irá funcionar.-->
-            <a mat-list-item [routerLink]="['/cursos']" routerLinkActive="router-link-active">
+            <a mat-list-item [routerLink]="['/cursos']" [queryParams]="{pagina:1}" routerLinkActive="router-link-active">
                 <i class="material-icons">
                     school
-                </i> Cursos
+                </i>
+                Cursos
             </a>
             <a mat-list-item [routerLink]="['/curso', idCurso.value]" routerLinkActive="router-link-active">
                 <i class="material-icons">
                     school
-                </i> Curso com id
+                </i>
+                Curso com id
             </a>
         </mat-nav-list>
     </mat-sidenav>
