@@ -1,5 +1,3 @@
-import { RouterModule } from '@angular/router';
-import { CursosService } from './cursos.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -13,6 +11,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 
+// Services
+import { CursosService } from './cursos.service';
+import { CursosRoutingModule } from './cursos-routing.module';
+
 @NgModule({
     declarations: [
         CursosComponent,
@@ -21,7 +23,8 @@ import { MatListModule } from '@angular/material/list';
     ],
     imports: [
         CommonModule,
-        RouterModule,
+
+        CursosRoutingModule,
 
         MatIconModule,
         MatToolbarModule,
