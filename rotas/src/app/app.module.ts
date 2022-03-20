@@ -8,13 +8,13 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { CursosModule } from './cursos/cursos.module';
+// import { CursosModule } from './cursos/cursos.module';
 // Angular Material
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
-import { AlunosModule } from './alunos/alunos.module';
+// import { AlunosModule } from './alunos/alunos.module';
 
 
 @NgModule({
@@ -29,8 +29,8 @@ import { AlunosModule } from './alunos/alunos.module';
         AppRoutingModule,
         BrowserAnimationsModule,
 
-        AlunosModule,
-        CursosModule,
+        // AlunosModule,
+        // CursosModule,
 
         MatIconModule,
         MatToolbarModule,

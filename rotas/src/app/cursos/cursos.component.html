@@ -1,6 +1,6 @@
 <p>Página: {{ pagina }}</p>
 <mat-selection-list #shoes [multiple]="false">
-    <mat-list-option *ngFor="let curso of cursos" [routerLink]="['/curso', curso.id]">
+    <mat-list-option *ngFor="let curso of cursos" [routerLink]="['/cursos', curso.id]">
         {{ curso.nome }}
     </mat-list-option>
 </mat-selection-list>
