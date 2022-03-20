@@ -1,2 +1,33 @@
-<p>alunos works!</p>
-<router-outlet></router-outlet>
+<mat-grid-list cols="2">
+    
+    <mat-grid-tile>
+        <h3>
+            Lista de alunos
+        </h3>
+
+        <mat-selection-list #todosAlunos [multiple]="false">
+            <mat-list-option *ngFor="let aluno of alunos" [routerLink]="[aluno.id]">
+                {{ aluno.nome }}
+            </mat-list-option>
+        </mat-selection-list>
+    </mat-grid-tile>
+    
+
+    <mat-grid-tile>
+        <router-outlet></router-outlet>
+    </mat-grid-tile>
+
+
+</mat-grid-list>
+
+
+
+
+
+
+<!-- Por estarmos utilizando rotas filhas, não há necessidade de colocar
+no routerLink /alunos, aluno.id, e sim somente aluno.id.
+
+Como é uma rota filha, não haverá redirecionamento, e sim vai abrir o componente
+na router-outlet.
+-->
