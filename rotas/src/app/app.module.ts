@@ -19,6 +19,7 @@ import { MatListModule } from '@angular/material/list';
 // import { AlunosModule } from './alunos/alunos.module';
 // Services
 import { AuthService } from './login/auth.service';
+import { AuthGuard } from './guards/auth.guard';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { AuthService } from './login/auth.service';
         MatListModule
     ],
     providers: [
-        AuthService
+        AuthService,
+        AuthGuard
     ],
     bootstrap: [AppComponent]
 })
