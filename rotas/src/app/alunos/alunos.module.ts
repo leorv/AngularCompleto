@@ -9,7 +9,7 @@ import { AlunoFormComponent } from './aluno-form/aluno-form.component';
 // Angular Material
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
-import {MatInputModule} from '@angular/material/input'; 
+import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';

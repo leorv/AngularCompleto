@@ -6,8 +6,8 @@
     </span>
 </mat-toolbar>
 
-<mat-sidenav-container class="container">    
-    <mat-sidenav class="sidenav" mode="side" opened fixedInViewport="true" fixedTopGap="64">
+<mat-sidenav-container class="container">
+    <mat-sidenav *ngIf="mostrarMenu" class="sidenav" mode="side" opened fixedInViewport="true" fixedTopGap="64">
         <mat-nav-list class="nav-list">
             <a mat-list-item [routerLink]="['/login']" routerLinkActive="router-link-active">
                 <i class="material-icons">
@@ -15,7 +15,8 @@
                 </i> Login
             </a>
             <!-- Apenas para constar, usando um CSS para deixar o link como ativo quando o usuário clicas, usar o routerLinkActive como abaixo apenas que irá funcionar.-->
-            <a mat-list-item [routerLink]="['/cursos']" [queryParams]="{pagina:1}" routerLinkActive="router-link-active">
+            <a mat-list-item [routerLink]="['/cursos']" [queryParams]="{pagina:1}"
+                routerLinkActive="router-link-active">
                 <i class="material-icons">
                     school
                 </i>
@@ -37,8 +38,11 @@
     </mat-sidenav>
 
     <mat-sidenav-content class="content">
+
         <!-- <p>Entre com o id do curso: </p>
         <input #idCurso type="text"> -->
+
         <router-outlet></router-outlet>
     </mat-sidenav-content>
+
 </mat-sidenav-container>
