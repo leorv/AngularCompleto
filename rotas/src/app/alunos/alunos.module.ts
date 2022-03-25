@@ -18,6 +18,7 @@ import { MatListModule } from '@angular/material/list';
 import { AlunosService } from './alunos.service';
 import { AlunosRoutingModule } from './alunos.routing.module';
 import { AlunosDeactivateGuard } from '../guards/alunos.deactivate.guard';
+import { AlunoDetalheResolver } from './guards/aluno-detalhe.resolver';
 
 @NgModule({
     declarations: [
@@ -41,7 +42,8 @@ import { AlunosDeactivateGuard } from '../guards/alunos.deactivate.guard';
     exports: [],
     providers: [
         AlunosService,
-        AlunosDeactivateGuard
+        AlunosDeactivateGuard,
+        AlunoDetalheResolver
     ],
 })
 export class AlunosModule { }
