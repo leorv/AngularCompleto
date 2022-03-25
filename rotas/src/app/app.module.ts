@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao-encontrada.component';
 // import { CursosModule } from './cursos/cursos.module';
 // Angular Material
 import { MatIconModule } from '@angular/material/icon';
@@ -25,12 +26,14 @@ import { CursosGuard } from './guards/cursos.guard';
 
 
 
+
 @NgModule({
     declarations: [
         AppComponent,
         HomeComponent,
         LoginComponent,
-        NavbarComponent
+        NavbarComponent,
+        PaginaNaoEncontradaComponent
     ],
     imports: [
         BrowserModule,
