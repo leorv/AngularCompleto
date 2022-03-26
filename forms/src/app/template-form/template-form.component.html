@@ -1,20 +1,15 @@
 <form #f="ngForm" (ngSubmit)="onSubmit(f)">
     <div class="form-floating mb-3">
         <input type="text" class="form-control" id="nome" placeholder="Seu nome" name="nome" [(ngModel)]="usuario.nome"
-            required>
+            required #nome>
         <label for="nome">Nome</label>
     </div>
+    <!-- 
+    Apenas para testar aparecendo na tela as classes que estão sendo aplicadas ao elemento nome.    
+    <div>
+        {{ nome.className }}
+    </div> -->
     <div class="form-floating mb-3">
-        <!--
-            
-            abaixo se fosse no angular 2, que não tem o validator email, do angular4+
-            
-            <input type="email" class="form-control" id="email" placeholder="nome@email.com"
-        name="email" [(ngModel)]="usuario.email"
-        required
-        pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?">
-        <label for="email">E-mail</label> -->
-
         <input type="email" class="form-control" id="email" placeholder="nome@email.com" name="email"
             [(ngModel)]="usuario.email" required email>
         <label for="email">E-mail</label>
