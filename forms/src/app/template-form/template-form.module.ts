@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TemplateFormComponent } from './template-form.component';
 import { FormsModule } from '@angular/forms';
 
-
+import { AlertModule } from 'ngx-bootstrap/alert';
 
 
 @NgModule({
@@ -12,7 +12,8 @@ import { FormsModule } from '@angular/forms';
     ],
     imports: [
         CommonModule,
-        FormsModule
+        FormsModule,
+        AlertModule
     ]
 })
 export class TemplateFormModule { }
