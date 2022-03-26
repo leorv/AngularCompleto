@@ -1,35 +1,121 @@
-<form #f="ngForm" (ngSubmit)="onSubmit(f)">
-    <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="nome" placeholder="Seu nome" name="nome" [(ngModel)]="usuario.nome"
-            required #nome="ngModel"
-            [class.is-invalid]="!nome.valid && nome.touched"
-            [class.is-valid]="nome.valid && nome.touched">
-        <label for="nome">Nome</label>
+<form class="row g-2 gy-2" #f="ngForm" (ngSubmit)="onSubmit(f)">
+
+    <div class="col-md-6">
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="nome" placeholder="Seu nome" name="nome" [(ngModel)]="usuario.nome"
+                required #nome="ngModel" [class.is-invalid]="!nome.valid && nome.touched"
+                [class.is-valid]="nome.valid && nome.touched">
+    
+            <label for="nome">Nome</label>
+        </div>
+        
+        <alert type="warning" *ngIf="!nome.valid && nome.touched">
+            <div>
+                <strong>Atenção!</strong> Nome é obrigatório.
+            </div>
+        </alert>
     </div>
 
-    <alert type="warning" *ngIf="!nome.valid && nome.touched">
-        <div>
-            <strong>Atenção!</strong> Nome é obrigatório.
+    <div class="col-md-6">
+        <div class="form-floating mb-3 col-md-12">
+            <input type="email" class="form-control" id="email" placeholder="nome@email.com" name="email"
+                [(ngModel)]="usuario.email" required email #email="ngModel"
+                [class.is-invalid]="!email.valid && email.touched" [class.is-valid]="email.valid && email.touched">
+            <label for="email">E-mail</label>
         </div>
-    </alert>
-
-    <div class="form-floating mb-3">
-        <input type="email" class="form-control" id="email" placeholder="nome@email.com" name="email"
-            [(ngModel)]="usuario.email" required email #email="ngModel"
-            [class.is-invalid]="!email.valid && email.touched"
-            [class.is-valid]="email.valid && email.touched">
-        <label for="email">E-mail</label>
+        <alert type="warning" *ngIf="!email.valid && email.touched">
+            <div>
+                <strong>Atenção!</strong> E-mail é obrigatório.
+            </div>
+        </alert>
     </div>
-    <alert type="warning" *ngIf="!email.valid && email.touched">
-        <div>
-            <strong>Atenção!</strong> E-mail é obrigatório.
-        </div>
-    </alert>
 
-    <button type="submit" class="btn btn-primary"
-    [disabled]="!f.valid">
+    <div class="col-md-3">
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="cep" name="cep" ngModel required #cep="ngModel"
+                placeholder="13.000-000" [class.is-invalid]="!cep.valid && cep.touched"
+                [class.is-valid]="cep.valid && cep.touched">
+                <label for="cep">CEP</label>
+        </div>
+    
+        <alert type="warning" *ngIf="!cep.valid && cep.touched">
+            <div>
+                <strong>Atenção!</strong> CEP é obrigatório.
+            </div>
+        </alert>
+    </div>
+
+    <div class="col-md-9">
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="complemento" name="complemento" ngModel>
+                <label for="complemento">Complemento</label>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="rua" name="rua" ngModel required #rua="ngModel"
+                placeholder="13.000-000" [class.is-invalid]="!rua.valid && rua.touched"
+                [class.is-valid]="rua.valid && rua.touched">
+                <label for="rua">Rua</label>
+        </div>
+    
+        <alert type="warning" *ngIf="!rua.valid && rua.touched">
+            <div>
+                <strong>Atenção!</strong> Rua é obrigatório.
+            </div>
+        </alert>
+    </div>
+
+    <div class="col-md-5">
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="bairro" name="bairro" ngModel required #bairro="ngModel"
+                placeholder="13.000-000" [class.is-invalid]="!bairro.valid && bairro.touched"
+                [class.is-valid]="bairro.valid && bairro.touched">
+                <label for="bairro">Bairro</label>
+        </div>
+    
+        <alert type="warning" *ngIf="!bairro.valid && bairro.touched">
+            <div>
+                <strong>Atenção!</strong> Bairro é obrigatório.
+            </div>
+        </alert>
+    </div>
+
+    <div class="col-md-4">
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="cidade" name="cidade" ngModel required #cidade="ngModel"
+                placeholder="13.000-000" [class.is-invalid]="!cidade.valid && cidade.touched"
+                [class.is-valid]="cidade.valid && cidade.touched">
+                <label for="cidade">Cidade</label>
+        </div>
+    
+        <alert type="warning" *ngIf="!cidade.valid && cidade.touched">
+            <div>
+                <strong>Atenção!</strong> Cidade é obrigatório.
+            </div>
+        </alert>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="estado" name="estado" ngModel required #estado="ngModel"
+                placeholder="13.000-000" [class.is-invalid]="!estado.valid && estado.touched"
+                [class.is-valid]="estado.valid && estado.touched">
+                <label for="estado">Estado</label>
+        </div>
+    
+        <alert type="warning" *ngIf="!estado.valid && estado.touched">
+            <div>
+                <strong>Atenção!</strong> Estado é obrigatório.
+            </div>
+        </alert>
+    </div>
+    
+
+    <button type="submit" class="btn btn-primary" [disabled]="!f.valid">
         Enviar
     </button>
 
-    <app-form-debug [form]="f" ></app-form-debug>
+    <app-form-debug [form]="f"></app-form-debug>
 </form>
