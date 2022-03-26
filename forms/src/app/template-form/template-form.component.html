@@ -1,10 +1,12 @@
-<form>
+<form #f="ngForm" (ngSubmit)="onSubmit(f)">
     <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="nome" placeholder="Seu nome">
+        <input type="text" class="form-control" id="nome" placeholder="Seu nome"
+        name="nome" ngModel>
         <label for="nome">Nome</label>
     </div>
     <div class="form-floating mb-3">
-        <input type="email" class="form-control" id="email" placeholder="nome@email.com">
+        <input type="email" class="form-control" id="email" placeholder="nome@email.com"
+        name="email" ngModel>
         <label for="email">E-mail</label>
     </div>
 
