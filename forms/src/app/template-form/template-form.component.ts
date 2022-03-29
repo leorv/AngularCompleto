@@ -22,10 +22,15 @@ export class TemplateFormComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    onSubmit(form: NgForm) {
-        console.log(form);
+    onSubmit(form: any) {
+        console.log('formulário: ', form);
         // console.log(this.usuario);
         // console.log(form.value);
+
+        // para teste eu usei: https://resttesttest.com/
+        this.http.post('https://httpbin.org/post', JSON.stringify(form.value))
+            .pipe(map(res => res))
+            .subscribe(result => console.log(result));
     }
 
     verificaInvalidTouched(campo: any) {
