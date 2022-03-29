@@ -1,4 +1,24 @@
-# Forms
+# Template Driven e Data Driven
+
+## Orientado a template
+
+Formulário é criado e configurado no HTML.
+
+Angular deduz um FormGroup a partir do HTML.
+
+(ngForm, ngModel, ngModelGroup...)
+
+## Orientado a dados
+
+Formulário é criado programaticamente e é sincronizado com o DOM/HTML.
+
+A maior parte do código estará no componente e não no HTML.
+
+## Qual é o certo?
+
+Não existe certo e errado, são duas formas de fazer.
+
+## Forms
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.3.
 
