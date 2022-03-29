@@ -20,67 +20,70 @@
         </app-campo-control-erro>
     </div>
 
-    <div class="col-md-3">
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="cep" name="cep" ngModel required #cep="ngModel"
-                placeholder="13.000-000" [ngClass]="aplicaCSSErro(cep)">
-            <label for="cep">CEP</label>
+    <div ngModelGroup="endereco">
+        <div class="col-md-3">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="cep" name="cep" ngModel required #cep="ngModel"
+                    placeholder="13.000-000" [ngClass]="aplicaCSSErro(cep)">
+                <label for="cep">CEP</label>
+            </div>
+    
+            <app-campo-control-erro [mostrarErro]="verificaInvalidTouched(cep)" msgErro="CEP é obrigatório">
+            </app-campo-control-erro>
         </div>
-
-        <app-campo-control-erro [mostrarErro]="verificaInvalidTouched(cep)" msgErro="CEP é obrigatório">
-        </app-campo-control-erro>
-    </div>
-
-    <div class="col-md-9">
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="complemento" name="complemento" ngModel>
-            <label for="complemento">Complemento</label>
+    
+        <div class="col-md-9">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="complemento" name="complemento" ngModel>
+                <label for="complemento">Complemento</label>
+            </div>
+        </div>
+    
+        <div class="col-md-12">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="rua" name="rua" ngModel required #rua="ngModel"
+                    placeholder="13.000-000" [ngClass]="aplicaCSSErro(rua)">
+                <label for="rua">Rua</label>
+            </div>
+    
+            <app-campo-control-erro [mostrarErro]="verificaInvalidTouched(rua)" msgErro="Rua é obrigatório">
+            </app-campo-control-erro>
+        </div>
+    
+        <div class="col-md-5">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="bairro" name="bairro" ngModel required #bairro="ngModel"
+                    placeholder="13.000-000" [ngClass]="aplicaCSSErro(bairro)">
+                <label for="bairro">Bairro</label>
+            </div>
+    
+            <app-campo-control-erro [mostrarErro]="verificaInvalidTouched(bairro)" msgErro="Bairro é obrigatório">
+            </app-campo-control-erro>
+        </div>
+    
+        <div class="col-md-4">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="cidade" name="cidade" ngModel required #cidade="ngModel"
+                    placeholder="13.000-000" [ngClass]="aplicaCSSErro(cidade)">
+                <label for="cidade">Cidade</label>
+            </div>
+    
+            <app-campo-control-erro [mostrarErro]="verificaInvalidTouched(cidade)" msgErro="Cidade é obrigatório">
+            </app-campo-control-erro>
+        </div>
+    
+        <div class="col-md-3">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="estado" name="estado" ngModel required #estado="ngModel"
+                    placeholder="13.000-000" [ngClass]="aplicaCSSErro(estado)">
+                <label for="estado">Estado</label>
+            </div>
+    
+            <app-campo-control-erro [mostrarErro]="verificaInvalidTouched(estado)" msgErro="Estado é obrigatório">
+            </app-campo-control-erro>
         </div>
     </div>
-
-    <div class="col-md-12">
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="rua" name="rua" ngModel required #rua="ngModel"
-                placeholder="13.000-000" [ngClass]="aplicaCSSErro(rua)">
-            <label for="rua">Rua</label>
-        </div>
-
-        <app-campo-control-erro [mostrarErro]="verificaInvalidTouched(rua)" msgErro="Rua é obrigatório">
-        </app-campo-control-erro>
-    </div>
-
-    <div class="col-md-5">
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="bairro" name="bairro" ngModel required #bairro="ngModel"
-                placeholder="13.000-000" [ngClass]="aplicaCSSErro(bairro)">
-            <label for="bairro">Bairro</label>
-        </div>
-
-        <app-campo-control-erro [mostrarErro]="verificaInvalidTouched(bairro)" msgErro="Bairro é obrigatório">
-        </app-campo-control-erro>
-    </div>
-
-    <div class="col-md-4">
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="cidade" name="cidade" ngModel required #cidade="ngModel"
-                placeholder="13.000-000" [ngClass]="aplicaCSSErro(cidade)">
-            <label for="cidade">Cidade</label>
-        </div>
-
-        <app-campo-control-erro [mostrarErro]="verificaInvalidTouched(cidade)" msgErro="Cidade é obrigatório">
-        </app-campo-control-erro>
-    </div>
-
-    <div class="col-md-3">
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="estado" name="estado" ngModel required #estado="ngModel"
-                placeholder="13.000-000" [ngClass]="aplicaCSSErro(estado)">
-            <label for="estado">Estado</label>
-        </div>
-
-        <app-campo-control-erro [mostrarErro]="verificaInvalidTouched(estado)" msgErro="Estado é obrigatório">
-        </app-campo-control-erro>
-    </div>
+    
 
 
     <button type="submit" class="btn btn-primary" [disabled]="!f.valid">
