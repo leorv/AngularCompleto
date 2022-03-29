@@ -20,12 +20,13 @@
         </app-campo-control-erro>
     </div>
 
-    <div ngModelGroup="endereco">
+    <div ngModelGroup="endereco" class="row g-2 gy-2">
         <div class="col-md-3">
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="cep" name="cep" ngModel required #cep="ngModel"
-                    placeholder="13.000-000" [ngClass]="aplicaCSSErro(cep)">
+                    placeholder="13.000-000" [ngClass]="aplicaCSSErro(cep)" (blur)="consultaCEP(cep.value)">
                 <label for="cep">CEP</label>
+                <!-- Em versões anteriores, ex Angular 2, o event binding blur seria ="consultaCEP($event.target.value)"-->
             </div>
     
             <app-campo-control-erro [mostrarErro]="verificaInvalidTouched(cep)" msgErro="CEP é obrigatório">
