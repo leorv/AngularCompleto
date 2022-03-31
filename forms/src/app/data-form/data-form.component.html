@@ -1,1 +1,76 @@
-<p>data-form works!</p>
+<form class="row g-2 gy-2" [formGroup]="formulario">
+    <div class="col-md-6">
+        <div class="form-floating mb-3">
+            <!-- No lugar de name="nome", para o Angular identificar o campo com o objeto formulário,
+            devemos fazer formControlName="nome"
+        Ou seja, qual é o nome utilizado no formBuilder. -->
+            <input type="text" class="form-control" id="nome" placeholder="Seu nome" formControlName="nome">
+            <label for="nome">Nome</label>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-floating mb-3 col-md-12">
+            <input type="email" class="form-control" id="email" placeholder="nome@email.com" formControlName="email">
+            <label for="email">E-mail</label>
+        </div>
+    </div>
+
+    <div ngModelGroup="endereco" class="row g-2 gy-2">
+        <div class="col-md-3">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="cep" name="cep" placeholder="13.000-000">
+                <label for="cep">CEP</label>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="complemento" name="complemento">
+                <label for="complemento">Complemento</label>
+            </div>
+        </div>
+
+        <div class="col-md-10">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="rua" name="rua" placeholder="13.000-000">
+                <label for="rua">Rua</label>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="numero" name="numero" placeholder="">
+                <label for="rua">Número</label>
+            </div>
+        </div>
+
+        <div class="col-md-5">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="bairro" name="bairro" placeholder="13.000-000">
+                <label for="bairro">Bairro</label>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="cidade" name="cidade" placeholder="13.000-000">
+                <label for="cidade">Cidade</label>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="estado" name="estado">
+                <label for="estado">Estado</label>
+            </div>
+
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Enviar
+    </button>
+
+    <app-form-debug [form]="formulario"></app-form-debug>
+</form>
