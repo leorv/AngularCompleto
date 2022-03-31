@@ -67,10 +67,15 @@
 
         </div>
     </div>
+    <div class="row">
+        <button type="submit" class="btn btn-primary col-sm-3">
+            Enviar
+        </button>
+        <button class="btn btn-secondary col-sm-3" (click)="resetar()">
+            Cancelar
+        </button>
+    </div>
 
-    <button type="submit" class="btn btn-primary">
-        Enviar
-    </button>
 
     <app-form-debug [form]="formulario"></app-form-debug>
 </form>

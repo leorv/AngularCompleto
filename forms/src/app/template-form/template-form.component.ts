@@ -30,7 +30,12 @@ export class TemplateFormComponent implements OnInit {
         // para teste eu usei: https://resttesttest.com/
         this.http.post('https://httpbin.org/post', JSON.stringify(form.value))
             .pipe(map(res => res))
-            .subscribe(result => console.log(result));
+            .subscribe(dados => {
+                console.log(dados);
+                // Aqui no template driven, temos que fazer referência ao form do template,
+                // acessando o atributo form dele e aí sim temos o reset().
+                form.form.reset();
+            });
     }
 
     verificaInvalidTouched(campo: any) {
