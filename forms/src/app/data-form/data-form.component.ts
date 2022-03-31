@@ -29,7 +29,7 @@ export class DataFormComponent implements OnInit {
 
         this.formulario = this.formBuilder.group({
             nome: [null, Validators.required],
-            email: [null, [Validators.required, Validators.email, Validators.minLength(3), Validators.maxLength(50)]]
+            email: [null, [Validators.required, Validators.email]]
         });
     }
 
@@ -53,5 +53,37 @@ export class DataFormComponent implements OnInit {
 
     resetar(){
         this.formulario.reset();
+    }
+
+    verificaInvalidTouched(campo: any) {
+        // Uma maneira de acessar o campo
+        // this.formulario.controls[campo]
+        // ou com o get.
+
+        return !this.formulario.get(campo)?.valid && !!this.formulario.get(campo)?.touched;
+
+        // tabela verdade
+        // valido true e tocado true = false e true = false => ok, nao há msg de erro.
+        // valido true e tocado false = false e false = false => ok, nao há msg de erro.
+        // valido false e tocado true = true e true = true => mostrar erro.
+        // valido false e tocado false = true e false = false => ok, nao há msg de erro.
+    }
+
+    aplicaCSSErro(campo: any) {
+        return {
+            'is-valid': this.verificaInvalidTouched(campo),
+            'is-invalid': this.verificaInvalidTouched(campo)
+        }
+    }
+
+    verificaEmailInvalido(){
+        let campoEmail = this.formulario.get('email');
+
+        if (campoEmail?.errors){
+            // Nós conseguimos acessar da forma abaixo porque o JavaScript
+            // trata arrays e objetos como dicionários
+            
+            return campoEmail.errors['email'] && campoEmail.touched;
+        }
     }
 }
