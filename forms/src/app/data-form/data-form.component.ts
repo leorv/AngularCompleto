@@ -29,7 +29,14 @@ export class DataFormComponent implements OnInit {
 
         this.formulario = this.formBuilder.group({
             nome: [null, Validators.required],
-            email: [null, [Validators.required, Validators.email]]
+            email: [null, [Validators.required, Validators.email]],
+            cep: [null, Validators.required],
+            complemento: [],
+            rua: [null, Validators.required],
+            numero: [null, Validators.required],
+            bairro: [null, Validators.required],
+            cidade: [null, Validators.required],
+            estado: [null, Validators.required]
         });
     }
 
@@ -55,7 +62,7 @@ export class DataFormComponent implements OnInit {
         this.formulario.reset();
     }
 
-    verificaInvalidTouched(campo: any) {
+    verificaInvalidTouched(campo: string) {
         // Uma maneira de acessar o campo
         // this.formulario.controls[campo]
         // ou com o get.
@@ -69,7 +76,7 @@ export class DataFormComponent implements OnInit {
         // valido false e tocado false = true e false = false => ok, nao há msg de erro.
     }
 
-    aplicaCSSErro(campo: any) {
+    aplicaCSSErro(campo: string) {
         return {
             'is-valid': this.verificaInvalidTouched(campo),
             'is-invalid': this.verificaInvalidTouched(campo)
