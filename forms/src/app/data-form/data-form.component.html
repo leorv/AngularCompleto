@@ -26,7 +26,9 @@
     <div formGroupName="endereco" class="row g-2 gy-2">
         <div class="col-md-3">
             <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="cep" name="cep" placeholder="" [ngClass]="aplicaCSSErro('endereco.cep')" formControlName="cep">
+                <input type="text" class="form-control" id="cep" name="cep" placeholder=""
+                 [ngClass]="aplicaCSSErro('endereco.cep')" formControlName="cep"
+                 (blur)="consultaCEP()">
                 <label for="cep">CEP</label>
                 <!-- Outra maneira, se o cep fosse um objeto que tivesse mais coisas dentro, outros atributos:
                 [mostrarErro]="formulario.get('endereco.cep.outro').valid"
@@ -41,7 +43,7 @@
 
         <div class="col-md-9">
             <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="complemento" name="complemento">
+                <input type="text" class="form-control" id="complemento" name="complemento" formControlName="complemento">
                 <label for="complemento">Complemento</label>
             </div>
         </div>

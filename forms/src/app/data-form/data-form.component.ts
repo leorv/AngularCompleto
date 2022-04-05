@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { map } from 'rxjs/operators';
@@ -106,5 +107,61 @@ export class DataFormComponent implements OnInit {
 
             return campoEmail.errors['email'] && campoEmail.touched;
         }
+    }
+
+    consultaCEP() {
+        console.log(this.formulario.get('endereco.cep'));
+
+        let cep = this.formulario.get('endereco.cep')?.value;
+
+        cep = cep.replace(/\D/g, '');
+
+
+        if (cep != "") {
+            var validaCEP = /^[0-9]{8}$/;
+
+            this.resetaDadosFormulario();
+
+            if (validaCEP.test(cep)) {
+                // this.http.get("//viacep.com.br/ws/" + cep + "/json"); <-- sem ECMA5
+                // Abaixo a concatenação com ECMAScript 5
+                this.http.get(`//viacep.com.br/ws/${cep}/json`)
+                    .pipe(map((dados: any) => dados))
+                    .subscribe(dados => {
+                        console.log(dados);
+                        this.populaDadosFormulario(dados)
+                    });
+            }
+        }
+    }
+
+    resetaDadosFormulario() {
+        // A diferença entre o setValue e o patchValue é que no patch nós fazemos apenas
+        // uma correção.
+        // E se formos passar o setValue, precisaremos setar todos os campos do formulário.
+        this.formulario.patchValue({
+            endereco: {
+                rua: null,
+                complemento: null,
+                bairro: null,
+                cidade: null,
+                estado: null
+            }
+        })
+    }
+
+    populaDadosFormulario(dados: any) {
+        this.formulario.patchValue({
+            endereco: {
+                rua: dados.logradouro,
+                complemento: dados.complemento,
+                bairro: dados.bairro,
+                cidade: dados.localidade,
+                estado: dados.uf
+            }
+        });
+        // Apenas a título de exemplo, pode-se também
+        // mudar apenas um campo:
+        // this.formulario.get('nome')?.setValue('Loiane');
     }
 }
