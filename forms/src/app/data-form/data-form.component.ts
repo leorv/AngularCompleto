@@ -15,7 +15,7 @@ export class DataFormComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private http: HttpClient
-        ) { }
+    ) { }
 
     ngOnInit(): void {
         /*
@@ -30,17 +30,31 @@ export class DataFormComponent implements OnInit {
         this.formulario = this.formBuilder.group({
             nome: [null, Validators.required],
             email: [null, [Validators.required, Validators.email]],
-            cep: [null, Validators.required],
-            complemento: [],
-            rua: [null, Validators.required],
-            numero: [null, Validators.required],
-            bairro: [null, Validators.required],
-            cidade: [null, Validators.required],
-            estado: [null, Validators.required]
+
+            endereco: this.formBuilder.group({
+                cep: [null, Validators.required],
+                complemento: [],
+                rua: [null, Validators.required],
+                numero: [null, Validators.required],
+                bairro: [null, Validators.required],
+                cidade: [null, Validators.required],
+                estado: [null, Validators.required]
+            })
+
+            // Outra forma de agrupar os campos:
+            // endereco: new FormGroup({
+            //     cep: new FormControl(null),
+            //     complemento: new FormControl(null),
+            //     rua: new FormControl(null),
+            //     numero: new FormControl(null),
+            //     bairro: new FormControl(null),
+            //     cidade: new FormControl(null),
+            //     estado: new FormControl(null)
+            // })            
         });
     }
 
-    onSubmit(){
+    onSubmit() {
         console.log(this.formulario);
         this.http.post('https://httpbin.org/post', JSON.stringify(this.formulario.value))
             .pipe(map(res => res))
@@ -49,16 +63,16 @@ export class DataFormComponent implements OnInit {
                 // this.formulario.reset();
                 this.resetar();
             }
-            // DEPRECATED:
-            //
-            //,
-            // (error: any) => {
-            //     alert('erro.');
-            // }
+                // DEPRECATED:
+                //
+                //,
+                // (error: any) => {
+                //     alert('erro.');
+                // }
             );
     }
 
-    resetar(){
+    resetar() {
         this.formulario.reset();
     }
 
@@ -83,13 +97,13 @@ export class DataFormComponent implements OnInit {
         }
     }
 
-    verificaEmailInvalido(){
+    verificaEmailInvalido() {
         let campoEmail = this.formulario.get('email');
 
-        if (campoEmail?.errors){
+        if (campoEmail?.errors) {
             // Nós conseguimos acessar da forma abaixo porque o JavaScript
             // trata arrays e objetos como dicionários
-            
+
             return campoEmail.errors['email'] && campoEmail.touched;
         }
     }
