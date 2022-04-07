@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { map } from 'rxjs/operators';
 import { EstadoBr } from '../shared/models/estado-br';
+import { ConsultaCepService } from '../shared/services/consulta-cep.service';
 import { DropdownService } from '../shared/services/dropdown.service';
 
 @Component({
@@ -19,7 +20,8 @@ export class DataFormComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private http: HttpClient,
-        private dropDownService: DropdownService
+        private dropDownService: DropdownService,
+        private cepService: ConsultaCepService
     ) { }
 
     ngOnInit(): void {
@@ -136,29 +138,17 @@ export class DataFormComponent implements OnInit {
     }
 
     consultaCEP() {
-        console.log(this.formulario.get('endereco.cep'));
-
         let cep = this.formulario.get('endereco.cep')?.value;
+        this.resetaDadosFormulario();
 
-        cep = cep.replace(/\D/g, '');
-
-
-        if (cep != "") {
-            var validaCEP = /^[0-9]{8}$/;
-
-            this.resetaDadosFormulario();
-
-            if (validaCEP.test(cep)) {
-                // this.http.get("//viacep.com.br/ws/" + cep + "/json"); <-- sem ECMA5
-                // Abaixo a concatenação com ECMAScript 5
-                this.http.get(`//viacep.com.br/ws/${cep}/json`)
-                    .pipe(map((dados: any) => dados))
-                    .subscribe(dados => {
-                        console.log(dados);
-                        this.populaDadosFormulario(dados)
-                    });
-            }
+        if (cep != null && cep !== ''){
+            this.cepService.consultaCEP(cep)
+                ?.subscribe(dados => {
+                    console.log(dados);
+                    this.populaDadosFormulario(dados);
+                });
         }
+        
     }
 
     resetaDadosFormulario() {
