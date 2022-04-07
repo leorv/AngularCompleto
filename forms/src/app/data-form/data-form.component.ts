@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
-import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { EstadoBr } from '../shared/models/estado-br';
 import { ConsultaCepService } from '../shared/services/consulta-cep.service';
@@ -15,7 +15,8 @@ import { DropdownService } from '../shared/services/dropdown.service';
 export class DataFormComponent implements OnInit {
 
     formulario: FormGroup = new FormGroup({});
-    estados: EstadoBr[] = [];
+    // estados: EstadoBr[] = [];
+    estados: Observable<EstadoBr[]> = new Observable();
 
     constructor(
         private formBuilder: FormBuilder,
@@ -25,21 +26,17 @@ export class DataFormComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.dropDownService.getEstadosBr()
-            .subscribe((dados: any) => {
-                this.estados = dados;
-                console.log('dados dos estados: ');
-                console.log(dados, this.estados);
-            });
+        // Não vamos fazer o subscribe aqui, o pipe async automaticamente
+        // faz o subscribe pra gente e quando ele for destruído ele também
+        // faz o unsubscribe.
+        this.estados = this.dropDownService.getEstadosBr();
 
-        /*
-        Esta é uma forma verbosa de instanciar o formulário com seus campos.
-        Há uma segunda forma, com o formBuilder.
-
-        this.formulario = new FormGroup({
-            nome: new FormControl(null),
-            email: new FormControl(null),
-        })*/
+        // this.dropDownService.getEstadosBr()
+        //     .subscribe((dados: any) => {
+        //         this.estados = dados;
+        //         console.log('dados dos estados: ');
+        //         console.log(dados, this.estados);
+        //     });
 
         this.formulario = this.formBuilder.group({
             nome: [null, Validators.required],

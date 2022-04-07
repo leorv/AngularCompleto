@@ -11,12 +11,12 @@ export class DropdownService {
 
   constructor(private http: HttpClient) { }
 
-  getEstadosBr(){
-    return this.http.get('assets/dados/estadosbr.json');
+  getEstadosBr(): Observable<EstadoBr[]>  {
+    return this.http.get<EstadoBr[]>('assets/dados/estadosbr.json');
     
         // Não funcionou:
         // .pipe(map((dados) => {
         //     dados;
-        // }));
+        // }), tap(console.log));
   }
 }
