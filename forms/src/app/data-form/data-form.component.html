@@ -94,7 +94,15 @@
         </div>
     </div>
     <div class="row">
-        <button type="submit" class="btn btn-primary col-sm-3">
+        <!--
+            <button type="submit" class="btn btn-primary col-sm-3" [disabled]="!formulario.valid">
+            Enviar
+        </button> 
+        Essa abordagem acima pode ser usada sem problemas, especialmente em formulários pequenos,
+    como em uma tela de login, mas a medida que nosso formulário começa a crescer, isso pode não
+    ficar tão simples para o usuário.
+        -->
+        <button type="submit" class="btn btn-primary col-sm-3" >
             Enviar
         </button>
         <button class="btn btn-secondary col-sm-3" (click)="resetar()">

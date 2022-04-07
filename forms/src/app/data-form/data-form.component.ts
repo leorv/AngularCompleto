@@ -56,21 +56,36 @@ export class DataFormComponent implements OnInit {
     }
 
     onSubmit() {
-        console.log(this.formulario);
-        this.http.post('https://httpbin.org/post', JSON.stringify(this.formulario.value))
-            .pipe(map(res => res))
-            .subscribe(dados => {
-                console.log(dados);
-                // this.formulario.reset();
-                this.resetar();
+        if (this.formulario.valid) {
+            this.http.post('https://httpbin.org/post', JSON.stringify(this.formulario.value))
+                .pipe(map(res => res))
+                .subscribe(dados => {
+                    console.log(dados);
+                    // this.formulario.reset();
+                    this.resetar();
+                }
+                );
+        } else {
+            console.log('formulário inválido.');
+
+            // No ES6 foi introduzido o keys, que consegue extrair cada chave que temos no objeto.
+            // vai extrair o nome, email e endereço:
+            this.verificaValidacoesFormulario(this.formulario);
+
+        }
+
+    }
+
+    verificaValidacoesFormulario(formGroup: FormGroup) {
+        Object.keys(formGroup.controls).forEach(campo => {
+            console.log(campo);
+            const controle = formGroup.get(campo);
+            // Aqui podemos marcar como dirty ou como tocado, fica a gosto do freguês.
+            controle?.markAsTouched()
+            if (controle instanceof FormGroup){
+                this.verificaValidacoesFormulario(controle);
             }
-                // DEPRECATED:
-                //
-                //,
-                // (error: any) => {
-                //     alert('erro.');
-                // }
-            );
+        });
     }
 
     resetar() {
@@ -82,7 +97,7 @@ export class DataFormComponent implements OnInit {
         // this.formulario.controls[campo]
         // ou com o get.
 
-        return !this.formulario.get(campo)?.valid && !!this.formulario.get(campo)?.touched;
+        return !this.formulario.get(campo)?.valid && (!!this.formulario.get(campo)?.touched || !!this.formulario.get(campo)?.dirty);
 
         // tabela verdade
         // valido true e tocado true = false e true = false => ok, nao há msg de erro.
