@@ -3,6 +3,8 @@ import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { map } from 'rxjs/operators';
+import { EstadoBr } from '../shared/models/estado-br';
+import { DropdownService } from '../shared/services/dropdown.service';
 
 @Component({
     selector: 'app-data-form',
@@ -12,13 +14,22 @@ import { map } from 'rxjs/operators';
 export class DataFormComponent implements OnInit {
 
     formulario: FormGroup = new FormGroup({});
+    estados: EstadoBr[] = [];
 
     constructor(
         private formBuilder: FormBuilder,
-        private http: HttpClient
+        private http: HttpClient,
+        private dropDownService: DropdownService
     ) { }
 
     ngOnInit(): void {
+        this.dropDownService.getEstadosBr()
+            .subscribe((dados: any) => {
+                this.estados = dados;
+                console.log('dados dos estados: ');
+                console.log(dados, this.estados);
+            });
+
         /*
         Esta é uma forma verbosa de instanciar o formulário com seus campos.
         Há uma segunda forma, com o formBuilder.
@@ -82,7 +93,7 @@ export class DataFormComponent implements OnInit {
             const controle = formGroup.get(campo);
             // Aqui podemos marcar como dirty ou como tocado, fica a gosto do freguês.
             controle?.markAsTouched()
-            if (controle instanceof FormGroup){
+            if (controle instanceof FormGroup) {
                 this.verificaValidacoesFormulario(controle);
             }
         });
