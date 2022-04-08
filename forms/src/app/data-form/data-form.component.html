@@ -96,6 +96,23 @@
             </div>
         </div>
     </div>
+    <div class="form-group">
+        <div class="col-md-3">
+            <div class="mb-3">
+                <label for="cargo">Cargo</label>
+                <select class="form-select" id="cargo"
+                 formControlName="cargo"
+                 [compareWith]="compararCargos">
+                    <option *ngFor="let cargo of cargos" [ngValue]="cargo">{{ cargo.desc }}</option>
+                    <!-- Se queremos comparar objetos complexos, não apenas pela sua referência, que é o que o angular faz,
+                    temos que usar o ngValue. -->
+                    <!-- Ou seja, se você está trabalhando com uma string, um number, etc, usa value
+                    porém, se vai trabalhar com objetos, usa ngValue
+                    e também implemente uma função compareWith para que o angular compare os valores.-->
+                </select>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <!--
             <button type="submit" class="btn btn-primary col-sm-3" [disabled]="!formulario.valid">
@@ -110,6 +127,9 @@
         </button>
         <button class="btn btn-secondary col-sm-3" (click)="resetar()">
             Cancelar
+        </button>
+        <button class="btn btn-primary col-sm-3" (click)="setarCargo()" >
+            Setar cargo
         </button>
     </div>
 
