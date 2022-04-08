@@ -112,6 +112,15 @@
                 </select>
             </div>
         </div>
+        <div class="col-md-3">
+            <div class="mb-3">
+                <label for="tecnologia">Tecnologias</label>
+                <select multiple class="form-select" id="tecnologia"
+                 formControlName="tecnologias">
+                    <option *ngFor="let tecnologia of tecnologias" [value]="tecnologia.nome">{{ tecnologia.desc }}</option>
+                </select>
+            </div>
+        </div>
     </div>
     <div class="row">
         <!--
@@ -130,6 +139,9 @@
         </button>
         <button class="btn btn-primary col-sm-3" (click)="setarCargo()" >
             Setar cargo
+        </button>
+        <button class="btn btn-info col-sm-3" (click)="setarTecnologias()" >
+            Setar tecnologias
         </button>
     </div>
 
