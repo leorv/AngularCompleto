@@ -19,7 +19,7 @@ export class DataFormComponent implements OnInit {
     estados: Observable<EstadoBr[]> = new Observable();
     cargos: any[] = [];
     tecnologias: any[] = [];
-    newsletterOp:any[] = [];
+    newsletterOp: any[] = [];
 
     constructor(
         private formBuilder: FormBuilder,
@@ -52,7 +52,8 @@ export class DataFormComponent implements OnInit {
             }),
             cargo: [null],
             tecnologias: [null],
-            newsletter: ['s']
+            newsletter: ['s'],
+            termos: [null, Validators.pattern('true')]
         });
     }
 
@@ -107,6 +108,10 @@ export class DataFormComponent implements OnInit {
         // valido false e tocado false = true e false = false => ok, nao há msg de erro.
     }
 
+    verificaInvalid(campo: string) {
+        return !this.formulario.get(campo)?.valid;
+    }
+
     aplicaCSSErro(campo: string) {
         return {
             'is-valid': this.verificaInvalidTouched(campo),
@@ -129,14 +134,14 @@ export class DataFormComponent implements OnInit {
         let cep = this.formulario.get('endereco.cep')?.value;
         this.resetaDadosFormulario();
 
-        if (cep != null && cep !== ''){
+        if (cep != null && cep !== '') {
             this.cepService.consultaCEP(cep)
                 ?.subscribe(dados => {
                     console.log(dados);
                     this.populaDadosFormulario(dados);
                 });
         }
-        
+
     }
 
     resetaDadosFormulario() {
@@ -169,16 +174,16 @@ export class DataFormComponent implements OnInit {
         // this.formulario.get('nome')?.setValue('Loiane');
     }
 
-    setarCargo(){
-        const cargo = { nome: 'Dev', nivel: 'Pleno', desc: 'Dev Pl'};
+    setarCargo() {
+        const cargo = { nome: 'Dev', nivel: 'Pleno', desc: 'Dev Pl' };
         this.formulario.get('cargo')?.setValue(cargo);
     }
 
-    compararCargos(obj1: any, obj2: any){
+    compararCargos(obj1: any, obj2: any) {
         return (obj1 && obj2) ? (obj1.nome === obj2.nome && obj1.nivel === obj2.nivel) : obj1 === obj2;
     }
 
-    setarTecnologias(){
-        this.formulario.get('tecnologias')?.setValue(['java','ruby']);
+    setarTecnologias() {
+        this.formulario.get('tecnologias')?.setValue(['java', 'ruby']);
     }
 }

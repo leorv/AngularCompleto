@@ -132,14 +132,27 @@
                 <label for="newsletter">News Letter</label>
                 <div id="newsletter" class="row">
                     <div class="col-sm-4" *ngFor="let item of newsletterOp">
-                        <input class="form-check-input" type="radio"
-                        formControlName="newsletter" [value]="item.valor">
+                        <input class="form-check-input" type="radio" formControlName="newsletter" [value]="item.valor">
                         <label class="form-check-label">
                             {{item.desc}}
                         </label>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-3">
+            <div class="form-check" [ngClass]="aplicaCSSErro('termos')">
+                <input class="form-check-input" type="checkbox" 
+                id="flexCheckDefault" formControlName="termos">
+                <label class="form-check-label" for="flexCheckDefault">
+                    Aceitar os termos
+                </label>
+            </div>
+            <app-campo-control-erro [mostrarErro]="verificaInvalid('termos')"
+                msgErro="Por favor, aceite os termos">
+            </app-campo-control-erro>
         </div>
     </div>
     <div class="row">
