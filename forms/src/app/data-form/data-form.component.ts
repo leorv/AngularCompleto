@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { EstadoBr } from '../shared/models/estado-br';
 import { ConsultaCepService } from '../shared/services/consulta-cep.service';
 import { DropdownService } from '../shared/services/dropdown.service';
+import { FormValidations } from '../shared/form-validations';
 
 @Component({
     selector: 'app-data-form',
@@ -59,31 +60,9 @@ export class DataFormComponent implements OnInit {
         });
     }
 
-    requiredMinCheckBox(min: number = 1) {
-        const validator: ValidatorFn = (formArray: AbstractControl) => {
-            /*     const values = formArray.controls;
-                let totalChecked = 0;
-                for (let i = 0; i <= values.length; i++){
-                    if (values[i].value){
-                        totalChecked += 1;
-                    }
-                } */
-            // abaixo temos o mesmo que alí em cima, só que de uma forma funcional.
-            if (formArray instanceof FormArray) {
-                const totalChecked = formArray.controls
-                    .map(v => v.value)
-                    .reduce((prev, next) => next ? prev + next : prev, 0);
-                return totalChecked >= min ? null : { required: true };
-            }
-            throw new Error('formArray não é uma instância de FormArray');
-        };
-
-        return validator;
-    }
-
     buildFrameworks() {
         const values = this.frameworks.map(v => new FormControl(false));
-        return this.formBuilder.array(values, this.requiredMinCheckBox(1));
+        return this.formBuilder.array(values, FormValidations.requiredMinCheckBox(1));
 
         // return [
         //     values
