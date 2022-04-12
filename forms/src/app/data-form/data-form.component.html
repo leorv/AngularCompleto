@@ -154,7 +154,7 @@
         </div>
     </div>
 
-    <div class="form-group col-md-4 row">
+    <div class="form-group col-md-4 row" [ngClass]="aplicaCSSErro('frameworks')">
         <div class="form-check" *ngFor="let item of frameworks; let i = index"
         formArrayName="frameworks">
             <input class="form-check-input" type="checkbox"
@@ -163,6 +163,8 @@
                 {{item}}
             </label>
         </div>
+        <app-campo-control-erro [mostrarErro]="!formulario.get('frameworks')?.valid" msgErro="Selecione uma opção.">
+        </app-campo-control-erro>
     </div>
 
     <!--

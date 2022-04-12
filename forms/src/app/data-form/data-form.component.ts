@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
@@ -59,9 +59,31 @@ export class DataFormComponent implements OnInit {
         });
     }
 
+    requiredMinCheckBox(min: number = 1) {
+        const validator: ValidatorFn = (formArray: AbstractControl) => {
+            /*     const values = formArray.controls;
+                let totalChecked = 0;
+                for (let i = 0; i <= values.length; i++){
+                    if (values[i].value){
+                        totalChecked += 1;
+                    }
+                } */
+            // abaixo temos o mesmo que alí em cima, só que de uma forma funcional.
+            if (formArray instanceof FormArray) {
+                const totalChecked = formArray.controls
+                    .map(v => v.value)
+                    .reduce((prev, next) => next ? prev + next : prev, 0);
+                return totalChecked >= min ? null : { required: true };
+            }
+            throw new Error('formArray não é uma instância de FormArray');
+        };
+
+        return validator;
+    }
+
     buildFrameworks() {
         const values = this.frameworks.map(v => new FormControl(false));
-        return this.formBuilder.array(values);
+        return this.formBuilder.array(values, this.requiredMinCheckBox(1));
 
         // return [
         //     values
@@ -80,7 +102,7 @@ export class DataFormComponent implements OnInit {
         let valueSubmit = Object.assign({}, this.formulario.value);
         valueSubmit = Object.assign(valueSubmit, {
             frameworks: valueSubmit.frameworks
-                .map((v:any, i:any) => v ? this.frameworks[i] : null)
+                .map((v: any, i: any) => v ? this.frameworks[i] : null)
                 .filter((v: any) => v !== null)
         });
         // Fim da correção.
