@@ -44,7 +44,7 @@ export class DataFormComponent implements OnInit {
             email: [null, [Validators.required, Validators.email]],
 
             endereco: this.formBuilder.group({
-                cep: [null, Validators.required],
+                cep: [null, [Validators.required, FormValidations.cepValidator]],
                 complemento: [],
                 rua: [null, Validators.required],
                 numero: [null, Validators.required],
@@ -136,6 +136,13 @@ export class DataFormComponent implements OnInit {
         // valido true e tocado false = false e false = false => ok, nao há msg de erro.
         // valido false e tocado true = true e true = true => mostrar erro.
         // valido false e tocado false = true e false = false => ok, nao há msg de erro.
+    }
+
+    verificaRequired(campo: string){
+        return !!(
+            this.formulario.get(campo)?.hasError('required') &&
+            (this.formulario.get(campo)?.touched || this.formulario.get(campo)?.dirty )
+        )
     }
 
     verificaInvalid(campo: string) {
