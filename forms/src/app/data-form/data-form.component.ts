@@ -43,6 +43,8 @@ export class DataFormComponent implements OnInit {
             nome: [null, Validators.required],
             email: [null, [Validators.required, Validators.email]],
             confirmarEmail: [null, [FormValidations.equalsTo('email')]],
+            // duplicamos o campo acima, e podemos utilizar dessa mesma estratégia
+            // para validar/comparar qualquer campo que quisermos no formulário.
 
             endereco: this.formBuilder.group({
                 cep: [null, [Validators.required, FormValidations.cepValidator]],

@@ -30,7 +30,7 @@
             <input type="email" class="form-control" id="confirmarEmail" placeholder="nome@email.com" formControlName="confirmarEmail"
                 [ngClass]="aplicaCSSErro('email')">
             <label for="confirmarEmail">E-mail</label>
-            <app-campo-control-erro [mostrarErro]="!!formulario.get('confirmarEmail')?.hasError('equalsTo')" msgErro="Confirmar Email é obrigatório">
+            <app-campo-control-erro [mostrarErro]="!!formulario.get('confirmarEmail')?.hasError('equalsTo')" msgErro="Por favor, confirme o e-mail digitando-o novamente">
             </app-campo-control-erro>
         </div>
     </div>
