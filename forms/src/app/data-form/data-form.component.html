@@ -25,6 +25,16 @@
         </div>
     </div>
 
+    <div class="col-md-6">
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="confirmarEmail" placeholder="nome@email.com" formControlName="confirmarEmail"
+                [ngClass]="aplicaCSSErro('email')">
+            <label for="confirmarEmail">E-mail</label>
+            <app-campo-control-erro [mostrarErro]="!!formulario.get('confirmarEmail')?.hasError('equalsTo')" msgErro="Confirmar Email é obrigatório">
+            </app-campo-control-erro>
+        </div>
+    </div>
+
     <div formGroupName="endereco" class="row g-2 gy-2">
         <div class="col-md-3">
             <div class="form-floating mb-3">
