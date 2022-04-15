@@ -22,6 +22,12 @@
             </app-campo-control-erro>
             <app-campo-control-erro [mostrarErro]="verificaEmailInvalido()" msgErro="Email inválido">
             </app-campo-control-erro>
+            <app-campo-control-erro [mostrarErro]="formulario.get('email')?.status === 'PENDING'" msgErro="Validando e-mail">
+            </app-campo-control-erro>
+            <app-campo-control-erro [mostrarErro]="formulario.get('email')?.status === 'VALID'" msgErro="O e-mail informado é válido">
+            </app-campo-control-erro>
+            <app-campo-control-erro [mostrarErro]="!!formulario.get('email')?.hasError('emailInvalido')" msgErro="E-mail já cadastrado">
+            </app-campo-control-erro>
         </div>
     </div>
 

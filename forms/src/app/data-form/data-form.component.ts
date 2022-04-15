@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
@@ -7,6 +7,7 @@ import { EstadoBr } from '../shared/models/estado-br';
 import { ConsultaCepService } from '../shared/services/consulta-cep.service';
 import { DropdownService } from '../shared/services/dropdown.service';
 import { FormValidations } from '../shared/form-validations';
+import { VerificaEmailService } from './services/verifica-email.service';
 
 @Component({
     selector: 'app-data-form',
@@ -27,10 +28,13 @@ export class DataFormComponent implements OnInit {
         private formBuilder: FormBuilder,
         private http: HttpClient,
         private dropDownService: DropdownService,
-        private cepService: ConsultaCepService
+        private cepService: ConsultaCepService,
+        private verificarEmailService: VerificaEmailService
     ) { }
 
     ngOnInit(): void {
+        // this.verificarEmailService.verificarEmail('email@email.com').subscribe();
+
         // Não vamos fazer o subscribe aqui, o pipe async automaticamente
         // faz o subscribe pra gente e quando ele for destruído ele também
         // faz o unsubscribe.
@@ -41,7 +45,7 @@ export class DataFormComponent implements OnInit {
 
         this.formulario = this.formBuilder.group({
             nome: [null, Validators.required],
-            email: [null, [Validators.required, Validators.email]],
+            email: [null, [Validators.required, Validators.email], [this.validarEmail.bind(this)]],
             confirmarEmail: [null, [FormValidations.equalsTo('email')]],
             // duplicamos o campo acima, e podemos utilizar dessa mesma estratégia
             // para validar/comparar qualquer campo que quisermos no formulário.
@@ -225,5 +229,10 @@ export class DataFormComponent implements OnInit {
 
     setarTecnologias() {
         this.formulario.get('tecnologias')?.setValue(['java', 'ruby']);
+    }
+
+    validarEmail(formControl: FormControl){
+        return this.verificarEmailService.verificarEmail(formControl.value)
+            .pipe(map(emailExiste => emailExiste ? { emailInvalido: true } : null));
     }
 }
