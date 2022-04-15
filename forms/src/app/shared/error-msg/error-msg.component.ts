@@ -1,4 +1,4 @@
-import { AbstractControl, FormControl } from '@angular/forms';
+import { AbstractControl, FormArray, FormControl } from '@angular/forms';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormValidations } from '../form-validations';
 
@@ -26,7 +26,14 @@ export class ErrorMsgComponent implements OnInit {
                             return FormValidations.getErrorMsg(this.label, propertyName, this.control.errors[propertyName]);
                     }
                 }
-            }            
+            }
+            if (this.control instanceof FormArray){
+                for (let propertyName in this.control.errors){
+                    if (this.control.errors.hasOwnProperty(propertyName)){
+                        return FormValidations.getErrorMsg(this.label, propertyName, this.control.errors[propertyName]);
+                    }
+                }
+            }
         }        
         return null;
     }

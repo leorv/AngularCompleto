@@ -59,7 +59,7 @@ export class DataFormComponent implements OnInit {
                 cidade: [null, Validators.required],
                 estado: [null, Validators.required]
             }),
-            cargo: [null],
+            cargo: [null, Validators.required],
             tecnologias: [null],
             newsletter: ['s'],
             termos: [null, Validators.pattern('true')],
@@ -74,10 +74,6 @@ export class DataFormComponent implements OnInit {
         // return [
         //     values
         // ]
-    }
-
-    debugar(obj: any) {
-        console.log(obj, obj.value);
     }
 
     onSubmit() {
