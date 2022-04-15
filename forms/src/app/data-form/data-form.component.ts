@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { distinctUntilChanged, map, tap } from 'rxjs/operators';
 import { EstadoBr } from '../shared/models/estado-br';
 import { ConsultaCepService } from '../shared/services/consulta-cep.service';
 import { DropdownService } from '../shared/services/dropdown.service';
@@ -65,6 +65,20 @@ export class DataFormComponent implements OnInit {
             termos: [null, Validators.pattern('true')],
             frameworks: this.buildFrameworks()
         });
+        this.formulario.get('endereco.cep')?.statusChanges
+            .pipe(
+                distinctUntilChanged(),
+                tap(value => console.log('status do CEP', value))
+            )
+            .subscribe(status => {
+                if (status === 'VALID') {
+                    this.cepService.consultaCEP(this.formulario.get('endereco.cep')?.value)
+                        ?.subscribe(dados => {
+                            console.log(dados);
+                            this.populaDadosFormulario(dados);
+                        });
+                }
+            })
     }
 
     buildFrameworks() {
@@ -141,10 +155,10 @@ export class DataFormComponent implements OnInit {
         // valido false e tocado false = true e false = false => ok, nao há msg de erro.
     }
 
-    verificaRequired(campo: string){
+    verificaRequired(campo: string) {
         return !!(
             this.formulario.get(campo)?.hasError('required') &&
-            (this.formulario.get(campo)?.touched || this.formulario.get(campo)?.dirty )
+            (this.formulario.get(campo)?.touched || this.formulario.get(campo)?.dirty)
         )
     }
 
@@ -227,7 +241,7 @@ export class DataFormComponent implements OnInit {
         this.formulario.get('tecnologias')?.setValue(['java', 'ruby']);
     }
 
-    validarEmail(formControl: FormControl){
+    validarEmail(formControl: FormControl) {
         return this.verificarEmailService.verificarEmail(formControl.value)
             .pipe(map(emailExiste => emailExiste ? { emailInvalido: true } : null));
     }

@@ -37,7 +37,7 @@
         <div class="col-md-3">
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="cep" name="cep" placeholder=""
-                    [ngClass]="aplicaCSSErro('endereco.cep')" formControlName="cep" (blur)="consultaCEP()">
+                    [ngClass]="aplicaCSSErro('endereco.cep')" formControlName="cep">
                 <label for="cep">CEP</label>
                 <app-error-msg [control]="formulario.get('endereco.cep')" label="CEP">
                 </app-error-msg>
