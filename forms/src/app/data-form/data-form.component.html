@@ -7,8 +7,8 @@
             <input type="text" class="form-control" id="nome" placeholder="Seu nome" formControlName="nome"
                 [ngClass]="aplicaCSSErro('nome')">
             <label for="nome">Nome</label>
-            <app-campo-control-erro [mostrarErro]="verificaInvalidTouched('nome')" msgErro="Nome é obrigatório">
-            </app-campo-control-erro>
+            <app-error-msg [control]="formulario.get('nome')" label="Nome">
+            </app-error-msg>
         </div>
 
     </div>

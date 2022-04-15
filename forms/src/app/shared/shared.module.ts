@@ -8,12 +8,14 @@ import { AlertModule } from 'ngx-bootstrap/alert';
 import { HttpClientModule } from '@angular/common/http';
 
 import { DropdownService } from './services/dropdown.service';
+import { ErrorMsgComponent } from './error-msg/error-msg.component';
 
 
 @NgModule({
   declarations: [
       FormDebugComponent,
-      CampoControlErroComponent
+      CampoControlErroComponent,
+      ErrorMsgComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +24,8 @@ import { DropdownService } from './services/dropdown.service';
   ],
   exports:[
     FormDebugComponent,
-    CampoControlErroComponent
+    CampoControlErroComponent,
+    ErrorMsgComponent
   ],
   providers: [
     DropdownService
