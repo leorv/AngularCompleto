@@ -1,0 +1,7 @@
+<div class="form-floating mb-3">
+    <input [type]="type" class="form-control" [id]="id" [placeholder]="placeholder" [disabled]="!!isReadOnly"
+        [value]="value" [ngClass]="classeCss" (input)="onChange(v.value)" (blur)="onTouched()" #v>
+    <label [attr.for]="id">{{label}}</label>
+    <app-error-msg [control]="control" [label]="label">
+    </app-error-msg>
+</div>

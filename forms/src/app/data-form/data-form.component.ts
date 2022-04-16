@@ -44,7 +44,7 @@ export class DataFormComponent implements OnInit {
         this.newsletterOp = this.dropDownService.getNewsletter();
 
         this.formulario = this.formBuilder.group({
-            nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+            nome: ['leonardo', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
             email: [null, [Validators.required, Validators.email], [this.validarEmail.bind(this)]],
             confirmarEmail: [null, [FormValidations.equalsTo('email')]],
             // duplicamos o campo acima, e podemos utilizar dessa mesma estratégia

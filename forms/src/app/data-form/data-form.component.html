@@ -1,96 +1,42 @@
 <form class="g-2 gy-2 row" [formGroup]="formulario" (ngSubmit)="onSubmit()">
-    <div class="col-md-6" [ngClass]="aplicaCSSErro('nome')">
-        <div class="form-floating mb-3">
-            <!-- No lugar de name="nome", para o Angular identificar o campo com o objeto formulário,
-            devemos fazer formControlName="nome"
-        Ou seja, qual é o nome utilizado no formBuilder. -->
-            <input type="text" class="form-control" id="nome" placeholder="Seu nome" formControlName="nome"
-                [ngClass]="aplicaCSSErro('nome')">
-            <label for="nome">Nome</label>
-            <app-error-msg [control]="formulario.get('nome')" label="Nome">
-            </app-error-msg>
-        </div>
 
-    </div>
+    <app-input-field class="col-md-4" [classeCss]="aplicaCSSErro('nome')" id="nome" label="nome" type="text"
+        formControlName="nome" [control]="formulario.get('nome')">
+    </app-input-field>
 
-    <div class="col-md-6">
-        <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="email" placeholder="nome@email.com" formControlName="email"
-                [ngClass]="aplicaCSSErro('email')">
-            <label for="email">E-mail</label>
-            <app-error-msg [control]="formulario.get('email')" label="E-mail">
-            </app-error-msg>
-        </div>
-    </div>
+    <app-input-field class="col-md-4" [classeCss]="aplicaCSSErro('email')" id="email" label="E-mail"
+    type="email" formControlName="email" [control]="formulario.get('email')">
+    </app-input-field>
 
-    <div class="col-md-6">
-        <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="confirmarEmail" placeholder="nome@email.com" formControlName="confirmarEmail"
-                [ngClass]="aplicaCSSErro('email')">
-            <label for="confirmarEmail">E-mail</label>
-            <app-error-msg [control]="formulario.get('confirmarEmail')" label="confirmar E-mail">
-            </app-error-msg>
-        </div>
-    </div>
+    <app-input-field class="col-md-4" [classeCss]="aplicaCSSErro('confirmarEmail')" id="confirmarEmail"
+    label="Confirmar e-mail" type="email" formControlName="confirmarEmail" [control]="formulario.get('confirmarEmail')">
+    </app-input-field>
 
     <div formGroupName="endereco" class="row g-2 gy-2">
-        <div class="col-md-3">
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="cep" name="cep" placeholder=""
-                    [ngClass]="aplicaCSSErro('endereco.cep')" formControlName="cep">
-                <label for="cep">CEP</label>
-                <app-error-msg [control]="formulario.get('endereco.cep')" label="CEP">
-                </app-error-msg>
-            </div>
-        </div>
 
-        <div class="col-md-9">
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="complemento" name="complemento"
-                    formControlName="complemento">
-                <label for="complemento">Complemento</label>
-            </div>
-        </div>
+        <app-input-field class="col-md-3" [classeCss]="aplicaCSSErro('endereco.cep')" id="cep" label="CEP"
+        type="text" formControlName="cep" [control]="formulario.get('endereco.cep')"
+        ></app-input-field>
 
-        <div class="col-md-10">
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="rua" name="rua" placeholder=""
-                    [ngClass]="aplicaCSSErro('endereco.rua')" formControlName="rua">
-                <label for="rua">Rua</label>
-                <app-error-msg [control]="formulario.get('endereco.rua')" label="Rua">
-                </app-error-msg>
-            </div>
-        </div>
+        <app-input-field class="col-md-9" id="complemento" label="Complemento" formControlName="complemento" 
+        [control]="formulario.get('endereco.complemento')"
+        ></app-input-field>
 
-        <div class="col-md-2">
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="numero" name="numero" placeholder=""
-                    [ngClass]="aplicaCSSErro('endereco.numero')" formControlName="numero">
-                <label for="rua">Número</label>
-                <app-error-msg [control]="formulario.get('endereco.numero')" label="Número">
-                </app-error-msg>
-            </div>
-        </div>
+        <app-input-field class="col-md-10" id="rua" label="Rua" formControlName="rua" 
+        [control]="formulario.get('endereco.rua')" [classeCss]="aplicaCSSErro('rua')"
+        ></app-input-field>
 
-        <div class="col-md-5">
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="bairro" name="bairro" placeholder=""
-                    [ngClass]="aplicaCSSErro('endereco.bairro')" formControlName="bairro">
-                <label for="bairro">Bairro</label>
-                <app-error-msg [control]="formulario.get('endereco.bairro')" label="Bairro">
-                </app-error-msg>
-            </div>
-        </div>
+        <app-input-field class="col-md-2" id="numero" [classeCss]="aplicaCSSErro('endereco.numero')"
+        label="Número" formControlName="numero" [control]="formulario.get('endereco.numero')"
+        ></app-input-field>
 
-        <div class="col-md-4">
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="cidade" name="cidade" placeholder=""
-                    [ngClass]="aplicaCSSErro('endereco.cidade')" formControlName="cidade">
-                <label for="cidade">Cidade</label>
-                <app-error-msg [control]="formulario.get('endereco.cidade')" label="Cidade">
-                </app-error-msg>
-            </div>
-        </div>
+        <app-input-field class="col-md-5" id="bairro" [classeCss]="aplicaCSSErro('endereco.bairro')"
+        formControlName="bairro" [control]="formulario.get('endereco.bairro')" label="Bairro"
+        ></app-input-field>
+
+        <app-input-field class="col-md-4" label="Cidade" formControlName="cidade" 
+        [classeCss]="aplicaCSSErro('endereco.cidade')" id="cidade" [control]="formulario.get('endereco.cidade')"
+        ></app-input-field>
 
         <div class="col-md-3">
             <div class="mb-3">
@@ -152,10 +98,8 @@
     </div>
 
     <div class="form-group col-md-4 row" [ngClass]="aplicaCSSErro('frameworks')">
-        <div class="form-check" *ngFor="let item of frameworks; let i = index"
-        formArrayName="frameworks">
-            <input class="form-check-input" type="checkbox"
-            [formControlName]="i">
+        <div class="form-check" *ngFor="let item of frameworks; let i = index" formArrayName="frameworks">
+            <input class="form-check-input" type="checkbox" [formControlName]="i">
             <label class="form-check-label">
                 {{item}}
             </label>
@@ -192,7 +136,15 @@
             Setar tecnologias
         </button>
     </div>
-
+    <div>
+        <p>Debug do campo nome:</p>
+        <p>
+            Nome: {{ formulario.get('nome')?.value }} <br>
+            Touched: {{ formulario.get('nome')?.touched }} <br>
+            Dirty: {{ formulario.get('nome')?.dirty }} <br>
+            Error: {{ formulario.get('nome')?.hasError('required') }} 
+        </p>
+    </div>
 
     <app-form-debug [form]="formulario"></app-form-debug>
 </form>
