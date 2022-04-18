@@ -8,16 +8,15 @@ import { ConsultaCepService } from '../shared/services/consulta-cep.service';
 import { DropdownService } from '../shared/services/dropdown.service';
 import { FormValidations } from '../shared/form-validations';
 import { VerificaEmailService } from './services/verifica-email.service';
+import { BaseFormComponent } from '../shared/base-form/base-form.component';
 
 @Component({
     selector: 'app-data-form',
     templateUrl: './data-form.component.html',
     styleUrls: ['./data-form.component.css']
 })
-export class DataFormComponent implements OnInit {
+export class DataFormComponent extends BaseFormComponent implements OnInit {
 
-    formulario: FormGroup = new FormGroup({});
-    // estados: EstadoBr[] = [];
     estados: Observable<EstadoBr[]> = new Observable();
     cargos: any[] = [];
     tecnologias: any[] = [];
@@ -30,9 +29,11 @@ export class DataFormComponent implements OnInit {
         private dropDownService: DropdownService,
         private cepService: ConsultaCepService,
         private verificarEmailService: VerificaEmailService
-    ) { }
+    ) {
+        super();
+    }
 
-    ngOnInit(): void {
+    override ngOnInit(): void {
         // this.verificarEmailService.verificarEmail('email@email.com').subscribe();
 
         // Não vamos fazer o subscribe aqui, o pipe async automaticamente
@@ -73,7 +74,7 @@ export class DataFormComponent implements OnInit {
                     this.cepService.consultaCEP(this.formulario.get('endereco.cep')?.value)
                     : EMPTY)
             )
-            .subscribe( dados => dados ? this.populaDadosFormulario(dados) : {});
+            .subscribe(dados => dados ? this.populaDadosFormulario(dados) : {});
     }
 
     buildFrameworks() {
@@ -85,9 +86,7 @@ export class DataFormComponent implements OnInit {
         // ]
     }
 
-    onSubmit() {
-        console.log(this.formulario);
-
+    submit() {
         // aqui vamos fazer uma correção no valor a ser enviado para o servidor
         // para o nome do framework sair corretamente, e não somente true ou false.
         let valueSubmit = Object.assign({}, this.formulario.value);
@@ -97,86 +96,11 @@ export class DataFormComponent implements OnInit {
                 .filter((v: any) => v !== null)
         });
         // Fim da correção.
-
-        console.log(valueSubmit);
-
-        if (this.formulario.valid) {
-            this.http.post('https://httpbin.org/post', JSON.stringify(valueSubmit))
-                .pipe(map(res => res))
-                .subscribe(dados => {
-                    console.log(dados);
-                    // this.formulario.reset();
-                    this.resetar();
-                }
-                );
-        } else {
-            console.log('formulário inválido.');
-
-            // No ES6 foi introduzido o keys, que consegue extrair cada chave que temos no objeto.
-            // vai extrair o nome, email e endereço:
-            this.verificaValidacoesFormulario(this.formulario);
-
-        }
-
-    }
-
-    verificaValidacoesFormulario(formGroup: FormGroup) {
-        Object.keys(formGroup.controls).forEach(campo => {
-            console.log(campo);
-            const controle = formGroup.get(campo);
-            // Aqui podemos marcar como dirty ou como tocado, fica a gosto do freguês.
-            controle?.markAsTouched()
-            if (controle instanceof FormGroup) {
-                this.verificaValidacoesFormulario(controle);
-            }
-        });
-    }
-
-    resetar() {
-        this.formulario.reset();
-    }
-
-    verificaInvalidTouched(campo: string) {
-        // Uma maneira de acessar o campo
-        // this.formulario.controls[campo]
-        // ou com o get.
-
-        return !this.formulario.get(campo)?.valid && (!!this.formulario.get(campo)?.touched || !!this.formulario.get(campo)?.dirty);
-
-        // tabela verdade
-        // valido true e tocado true = false e true = false => ok, nao há msg de erro.
-        // valido true e tocado false = false e false = false => ok, nao há msg de erro.
-        // valido false e tocado true = true e true = true => mostrar erro.
-        // valido false e tocado false = true e false = false => ok, nao há msg de erro.
-    }
-
-    verificaRequired(campo: string) {
-        return !!(
-            this.formulario.get(campo)?.hasError('required') &&
-            (this.formulario.get(campo)?.touched || this.formulario.get(campo)?.dirty)
-        )
-    }
-
-    verificaInvalid(campo: string) {
-        return !this.formulario.get(campo)?.valid;
-    }
-
-    aplicaCSSErro(campo: string) {
-        return {
-            'is-valid': this.verificaInvalidTouched(campo),
-            'is-invalid': this.verificaInvalidTouched(campo)
-        }
-    }
-
-    verificaEmailInvalido() {
-        let campoEmail = this.formulario.get('email');
-
-        if (campoEmail?.errors) {
-            // Nós conseguimos acessar da forma abaixo porque o JavaScript
-            // trata arrays e objetos como dicionários
-
-            return campoEmail.errors['email'] && campoEmail.touched;
-        }
+        this.http.post('https://httpbin.org/post', JSON.stringify(valueSubmit))
+            .pipe(map(res => res))
+            .subscribe(dados => {
+                this.resetar();
+            });
     }
 
     consultaCEP() {
