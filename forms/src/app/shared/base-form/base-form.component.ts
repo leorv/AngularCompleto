@@ -8,6 +8,7 @@ import { FormArray, FormGroup } from '@angular/forms';
 export abstract class BaseFormComponent implements OnInit {
 
     formulario: FormGroup = new FormGroup({});
+    private formSubmitAttempt: boolean = false;
 
     constructor() { }
 
@@ -15,6 +16,7 @@ export abstract class BaseFormComponent implements OnInit {
     }
 
     onSubmit() {
+        this.formSubmitAttempt = true;
         if (this.formulario.valid) {
             this.submit();
         }
@@ -31,6 +33,7 @@ export abstract class BaseFormComponent implements OnInit {
             const controle = formGroup.get(campo);
             // Aqui podemos marcar como dirty ou como tocado, fica a gosto do freguês.
             controle?.markAsTouched() // ou markAsDirty()
+            // controle?.markAsTouched({onlySelf: true}) <= assim ele marca somente o campo e não seu pai.
             if (controle != null && controle instanceof FormGroup || controle instanceof FormArray) {
                 this.verificaValidacoesFormulario(controle);
             }
@@ -39,6 +42,7 @@ export abstract class BaseFormComponent implements OnInit {
 
     resetar() {
         this.formulario.reset();
+        this.formSubmitAttempt = false;
     }
 
     getCampo(campo: string) {
@@ -50,13 +54,20 @@ export abstract class BaseFormComponent implements OnInit {
         // this.formulario.controls[campo]
         // ou com o get.
 
-        return !this.formulario.get(campo)?.valid && (!!this.formulario.get(campo)?.touched || !!this.formulario.get(campo)?.dirty);
+        return !this.formulario.get(campo)?.valid && (!!this.formulario.get(campo)?.touched 
+            || !!this.formulario.get(campo)?.untouched && this.formSubmitAttempt);
 
         // tabela verdade
         // valido true e tocado true = false e true = false => ok, nao há msg de erro.
         // valido true e tocado false = false e false = false => ok, nao há msg de erro.
         // valido false e tocado true = true e true = true => mostrar erro.
         // valido false e tocado false = true e false = false => ok, nao há msg de erro.
+
+        // tabela verdade para segunda parte (submitAttempt)
+        // untouched true e submitAttempt true = true, mostrar erro.
+        // untouched true e submitAttempt false = false => ok, nao há msg de erro.
+        // untouched false e submitAttempt true = false => ok, nao há msg de erro.
+        // untouched false e submitAttempt false = false => ok, nao há msg de erro.
     }
 
     verificaRequired(campo: string) {
