@@ -9,6 +9,7 @@ import { DropdownService } from '../shared/services/dropdown.service';
 import { FormValidations } from '../shared/form-validations';
 import { VerificaEmailService } from './services/verifica-email.service';
 import { BaseFormComponent } from '../shared/base-form/base-form.component';
+import { Cidade } from '../shared/models/cidade';
 
 @Component({
     selector: 'app-data-form',
@@ -17,7 +18,9 @@ import { BaseFormComponent } from '../shared/base-form/base-form.component';
 })
 export class DataFormComponent extends BaseFormComponent implements OnInit {
 
-    estados: Observable<EstadoBr[]> = new Observable();
+    // estados: Observable<EstadoBr[]> = new Observable();
+    estados: EstadoBr[] = [];
+    cidades: Cidade[] = [];
     cargos: any[] = [];
     tecnologias: any[] = [];
     newsletterOp: any[] = [];
@@ -39,7 +42,9 @@ export class DataFormComponent extends BaseFormComponent implements OnInit {
         // Não vamos fazer o subscribe aqui, o pipe async automaticamente
         // faz o subscribe pra gente e quando ele for destruído ele também
         // faz o unsubscribe.
-        this.estados = this.dropDownService.getEstadosBr();
+        // this.estados = this.dropDownService.getEstadosBr();
+        this.dropDownService.getEstadosBr()
+            .subscribe(dados => this.estados = dados);
         this.cargos = this.dropDownService.getCargos();
         this.tecnologias = this.dropDownService.getTecnologias();
         this.newsletterOp = this.dropDownService.getNewsletter();
@@ -75,6 +80,18 @@ export class DataFormComponent extends BaseFormComponent implements OnInit {
                     : EMPTY)
             )
             .subscribe(dados => dados ? this.populaDadosFormulario(dados) : {});
+
+        this.formulario.get('endereco.estado')?.valueChanges
+            .pipe(
+                tap(estado => console.log('Novo estado: ', estado)),
+                map(estado => this.estados.filter(e => e.sigla == estado)),
+                map((estados: any) => estados && estados.length > 0 ? estados[0].id : EMPTY),
+                switchMap((estadoId: number) => this.dropDownService.getCidadesBr(estadoId)),
+                tap(console.log)
+            )
+            .subscribe(cidades => this.cidades = cidades);
+
+        // this.dropDownService.getCidadesBr(8).subscribe(console.log);
     }
 
     buildFrameworks() {
@@ -114,7 +131,6 @@ export class DataFormComponent extends BaseFormComponent implements OnInit {
                     this.populaDadosFormulario(dados);
                 });
         }
-
     }
 
     resetaDadosFormulario() {
@@ -142,6 +158,7 @@ export class DataFormComponent extends BaseFormComponent implements OnInit {
                 estado: dados.uf
             }
         });
+        // this.formulario.get('endereco.cidade')?.setValue(dados.localidade);
         // Apenas a título de exemplo, pode-se também
         // mudar apenas um campo:
         // this.formulario.get('nome')?.setValue('Loiane');

@@ -34,16 +34,28 @@
         formControlName="bairro" [control]="formulario.get('endereco.bairro')" label="Bairro"
         ></app-input-field>
 
-        <app-input-field class="col-md-4" label="Cidade" formControlName="cidade" 
+        <!-- <app-input-field class="col-md-4" label="Cidade" formControlName="cidade" 
         [classeCss]="aplicaCSSErro('endereco.cidade')" id="cidade" [control]="formulario.get('endereco.cidade')"
-        ></app-input-field>
+        ></app-input-field> -->
+
+        <div class="col-md-4">
+            <div class="mb-3">
+                <label for="cidade">Cidade</label>
+                <select type="text" class="form-select" id="cidade" name="cidade"
+                    [ngClass]="aplicaCSSErro('endereco.cidade')" formControlName="cidade">
+                    <option *ngFor="let cidade of cidades" [value]="cidade.nome">{{ cidade.nome }}</option>
+                </select>
+                <app-error-msg [control]="formulario.get('endereco.cidade')" label="Cidade">
+                </app-error-msg>
+            </div>
+        </div>
 
         <div class="col-md-3">
             <div class="mb-3">
                 <label for="estado">Estado</label>
                 <select type="text" class="form-select" id="estado" name="estado"
                     [ngClass]="aplicaCSSErro('endereco.estado')" formControlName="estado">
-                    <option *ngFor="let estado of estados | async" [value]="estado.sigla">{{ estado.nome }}</option>
+                    <option *ngFor="let estado of estados" [value]="estado.sigla">{{ estado.nome }}</option>
                 </select>
                 <app-error-msg [control]="formulario.get('endereco.estado')" label="Estado">
                 </app-error-msg>
