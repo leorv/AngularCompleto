@@ -1,27 +1,43 @@
 # RequestsHttp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.3.
+## Instalando o bootstrap
 
-## Development server
+Conferir em nos docs do bootstrap. Em geral:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+```npm install bootstrap --save```
 
-## Code scaffolding
+Se quiser passar uma versão:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```npm install bootstrap@3.3.7```
 
-## Build
+O --save atualiza o package.json. Recomendável.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Adicionar o bootstrap nos styles.
 
-## Running unit tests
+## Instalando o ngx-bootstrap
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Ao invés de usar o JQuery, podemos usar o ngx-bootstrap.
 
-## Running end-to-end tests
+Conferir nas docs do ngx bootstrap. Em geral:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```ng add ngx-bootstrap```
 
-## Further help
+## Utilizar o json-server
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Para simular os 4 verbos http.
+
+```npm install -g json-server```
+
+Podemos criar um arquivo db.json com alguns dados de exemplo.
+
+Então, no terminal:
+
+```json-server --watch db.json```
+
+## Plugin REST CLIENT
+
+Podemos testar o server com este plugin, fazendo requisições http.
+
+É um plugin do VS Code.
+
+Então criamos um arquivo *.http e podemos criar as requisições lá.
