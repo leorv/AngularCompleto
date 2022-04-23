@@ -2,7 +2,7 @@
     <div class="card-header">
         <div class="row">
             <div class="col">
-                <h5>Lista de cursos</h5>
+                <h3>Lista de cursos</h3>
             </div>
             <div class="col text-end">
                 <button class="btn btn-primary" [routerLink]="['novo']">Novo curso</button>
@@ -11,7 +11,10 @@
     </div>
 
     <div class="card-body">
-        <table class="table table-hover">
+        <!-- Fazemos o "as cursos" abaixo para evitar usar dois | async, ou seja,
+        para evitarmos usar dois Observables. Então reutilizamos essa variável
+         lá no ng-for.-->
+        <table class="table table-hover" *ngIf="cursos$ | async as cursos; else loading">
             <thead>
                 <tr>
                     <th>#</th>
@@ -36,5 +39,9 @@
                 </tr>
             </tbody>
         </table>
+        <ng-template #loading>
+            <span>Carregando cursos...</span>
+        </ng-template>
+        
     </div>
 </div>
