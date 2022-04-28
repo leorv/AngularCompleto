@@ -1,8 +1,10 @@
 import { switchMap } from 'rxjs/operators';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { catchError, Observable, EMPTY, Subject } from 'rxjs';
 import { Curso } from '../curso';
 import { CursosService } from '../cursos.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { AlertModalComponent } from './../../shared/alert-modal/alert-modal.component';
 
 @Component({
     selector: 'app-cursos-lista',
@@ -19,7 +21,12 @@ export class CursosListaComponent implements OnInit {
 
     error$ = new Subject<boolean>();
 
-    constructor(private cursoService: CursosService) { }
+    bsModalRef?: BsModalRef;
+
+    constructor(
+        private cursoService: CursosService,
+        private modalService: BsModalService
+    ) { }
 
     ngOnInit(): void {
         // this.cursoService.list().subscribe(
@@ -36,11 +43,18 @@ export class CursosListaComponent implements OnInit {
                 // switchMap()
                 catchError(error => {
                     console.error(error);
-                    this.error$.next(true);
+                    // this.error$.next(true);
+                    this.handleError();
                     return EMPTY;
                     // return of(); // isso aqui daria o mesmo resultado dali de cima.
                 })
             );
+    }
+
+    handleError(){
+        this.bsModalRef = this.modalService.show(AlertModalComponent);
+        this.bsModalRef.content.type = 'danger';
+        this.bsModalRef.content.message = 'Erro ao carregar cursos. Tente novamente mais tarde.';
     }
 
 }
