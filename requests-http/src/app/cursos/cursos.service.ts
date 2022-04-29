@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { delay, tap } from 'rxjs';
+import { delay, take, tap } from 'rxjs';
 
 import { environment } from './../../environments/environment';
 import { Curso } from './curso';
@@ -23,5 +23,13 @@ export class CursosService {
                 delay(2000),
                 tap(console.log)
             );
+    }
+
+    create(curso: Curso){
+        return this.http.post(this.API, curso).pipe(take(1)); // Como estamos utilizando Ajax simples, não tem
+        // necessidade de ficarmos utilizando observables.
+        // Exceto se nosso back-end fosse reativo, aí não precisaria do take, ficaria escutando sempre.
+        // Não precisamos então colocar aqueles mecanismos para se desinscrever, o take vai fazer isso
+        // automaticamente.
     }
 }
