@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { delay, take, tap } from 'rxjs';
+import { delay, take, tap, Observable } from 'rxjs';
 
 import { environment } from './../../environments/environment';
 import { Curso } from './curso';
@@ -23,6 +23,10 @@ export class CursosService {
                 delay(2000),
                 tap(console.log)
             );
+    }
+
+    getByid(id: number): Observable<Curso>{
+        return this.http.get<Curso>(`${this.API}/${id}`).pipe(take(1)); // take(1) -> não precisamos fazer unsubscribe.
     }
 
     create(curso: Curso){
