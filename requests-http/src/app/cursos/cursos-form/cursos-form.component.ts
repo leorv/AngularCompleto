@@ -42,39 +42,41 @@ export class CursosFormComponent implements OnInit {
         //         )
         //     })
 
-        this.route.params
-            .pipe(
-                map((params: any) => {
-                    const id: number = params['id'];
-                    return id;
-                }),
-                switchMap((id: number) => this.cursosService.getByid(id))
-                // poderia também colocar mais um switchMap para por exemplo pegar as aulas do curso.
-                // switchMap(curso => obterAulas), nessa lógica.
-            )
-            .subscribe((curso: Curso) => this.updateForm(curso));
-            // concatMap -> ordem da requisição importa
-            // mergeMap -> ordem não importa
-            // exhaustMap -> casos de login
+        // this.route.params
+        //     .pipe(
+        //         map((params: any) => {
+        //             const id: number = params['id'];
+        //             return id;
+        //         }),
+        //         switchMap((id: number) => this.cursosService.getByid(id))
+        //         // poderia também colocar mais um switchMap para por exemplo pegar as aulas do curso.
+        //         // switchMap(curso => obterAulas), nessa lógica.
+        //     )
+        //     .subscribe((curso: Curso) => this.updateForm(curso));
+        // concatMap -> ordem da requisição importa
+        // mergeMap -> ordem não importa
+        // exhaustMap -> casos de login
 
-            // DETALHE IMPORTANTE:
-            // Quando fazemos o subscribe no route.params, é o próprio Angular que vai
-            // gerenciar essa inscrição. :)
-            // Não precisa de unsubscribe, take, takeuntil, etc.
+        // DETALHE IMPORTANTE:
+        // Quando fazemos o subscribe no route.params, é o próprio Angular que vai
+        // gerenciar essa inscrição. :)
+        // Não precisa de unsubscribe, take, takeuntil, etc.
+
+        const curso: Curso = this.route.snapshot.data['curso'];
 
         this.form = this.formBuilder.group({
-            id: [null],
-            nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(128)]]
+            id: [curso.id],
+            nome: [curso.nome, [Validators.required, Validators.minLength(3), Validators.maxLength(128)]]
         })
     }
 
 
-    updateForm(curso: Curso) {
-        this.form.patchValue({
-            id: curso.id,
-            nome: curso.nome
-        })
-    }
+    // updateForm(curso: Curso) {
+    //     this.form.patchValue({
+    //         id: curso.id,
+    //         nome: curso.nome
+    //     })
+    // }
 
     hasError(campo: string) {
         return this.form.get(campo)?.errors;
