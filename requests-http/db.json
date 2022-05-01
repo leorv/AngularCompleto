@@ -13,20 +13,12 @@
       "id": 3
     },
     {
-      "id": 4,
-      "nome": "Angular Material1111"
-    },
-    {
       "nome": "Java 8",
       "id": 5
     },
     {
       "nome": ".NET C#",
       "id": 6
-    },
-    {
-      "id": 7,
-      "nome": "Java 18"
     }
   ]
 }
