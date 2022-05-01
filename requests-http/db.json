@@ -13,12 +13,12 @@
       "id": 3
     },
     {
-      "nome": "Java 8",
-      "id": 5
-    },
-    {
       "nome": ".NET C#",
       "id": 6
+    },
+    {
+      "id": 7,
+      "nome": "Ionic e Angular"
     }
   ]
 }

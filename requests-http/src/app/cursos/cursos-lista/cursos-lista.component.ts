@@ -2,11 +2,11 @@ import { switchMap, take } from 'rxjs/operators';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { catchError, Observable, EMPTY, Subject } from 'rxjs';
 import { Curso } from '../curso';
-import { CursosService } from '../cursos.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AlertModalComponent } from './../../shared/alert-modal/alert-modal.component';
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { CursosCrudService } from '../cursos-crud.service';
 
 @Component({
     selector: 'app-cursos-lista',
@@ -32,7 +32,7 @@ export class CursosListaComponent implements OnInit {
     @ViewChild('deleteModal') deleteModal: any;
 
     constructor(
-        private cursoService: CursosService,
+        private cursoService: CursosCrudService,
         private alertModalService: AlertModalService,
         private router: Router,
         private route: ActivatedRoute,
