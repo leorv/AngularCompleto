@@ -87,18 +87,53 @@ export class CursosFormComponent implements OnInit {
         console.log(this.form.value);
         if (this.form.valid) {
             console.log('submit');
-            this.cursosService.create(this.form.value).subscribe({
+
+            let msgSuccess = 'Curso criado com sucesso!';
+            let msgError = 'Erro ao criar curso.';
+            if (this.form.value.id){
+                msgSuccess = 'Curso atualizado com sucesso!';
+                msgError = 'Erro ao atualizar curso.';
+            }
+
+            this.cursosService.save(this.form.value).subscribe({
                 next: success => {
-                    console.log('sucesso', success);
-                    this.modal.showAlertSuccess('Curso criado com sucesso.');
-                    this.location.back(); // Mesma coisa que clicar no botão de voltar do browser.
+                    this.modal.showAlertSuccess(msgSuccess);
+                    this.location.back();
                 },
                 error: error => {
-                    console.log('Erro:', error);
-                    this.modal.showAlertDanger('Erro ao criar curso');
-                },
-                complete: () => console.log('Request completado.')
-            });
+                    this.modal.showAlertDanger(msgError);
+                }
+            })
+
+            // if (this.form.value.id) {
+            //     // update
+            //     this.cursosService.update(this.form.value).subscribe({
+            //         next: success => {
+            //             console.log('sucesso', success);
+            //             this.modal.showAlertSuccess('Curso atualizado com sucesso.');
+            //             this.location.back(); // Mesma coisa que clicar no botão de voltar do browser.
+            //         },
+            //         error: error => {
+            //             console.log('Erro:', error);
+            //             this.modal.showAlertDanger('Erro ao atualizar curso');
+            //         },
+            //         complete: () => console.log('Request completado (update).')
+            //     })
+            // }
+            // else {
+            //     this.cursosService.create(this.form.value).subscribe({
+            //         next: success => {
+            //             console.log('sucesso', success);
+            //             this.modal.showAlertSuccess('Curso criado com sucesso.');
+            //             this.location.back(); // Mesma coisa que clicar no botão de voltar do browser.
+            //         },
+            //         error: error => {
+            //             console.log('Erro:', error);
+            //             this.modal.showAlertDanger('Erro ao criar curso');
+            //         },
+            //         complete: () => console.log('Request completado.')
+            //     });
+            // }
         }
     }
 

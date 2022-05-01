@@ -29,11 +29,22 @@ export class CursosService {
         return this.http.get<Curso>(`${this.API}/${id}`).pipe(take(1)); // take(1) -> não precisamos fazer unsubscribe.
     }
 
-    create(curso: Curso){
+    private create(curso: Curso){
         return this.http.post(this.API, curso).pipe(take(1)); // Como estamos utilizando Ajax simples, não tem
         // necessidade de ficarmos utilizando observables.
         // Exceto se nosso back-end fosse reativo, aí não precisaria do take, ficaria escutando sempre.
         // Não precisamos então colocar aqueles mecanismos para se desinscrever, o take vai fazer isso
         // automaticamente.
+    }
+
+    private update(curso: Curso){
+        return this.http.put(`${this.API}/${curso.id}`, curso).pipe(take(1));
+    }
+
+    save(curso: Curso){
+        if (curso.id){
+            return this.update(curso);
+        }
+        return this.create(curso);
     }
 }

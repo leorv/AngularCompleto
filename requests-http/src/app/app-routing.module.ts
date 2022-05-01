@@ -11,7 +11,6 @@ const routes: Routes = [
         // mas agora não recebe mais string, e sim loadChildrenCallback
     },
     {
-        // TODO:inserir o componente corretamente no lazy loading.
         path: 'rxjs-poc', loadChildren: () => import('../app/unsubscribe-rxjs/unsubscribe-rxjs.module').then(mod => mod.UnsubscribeRxjsModule)
     },
     {
