@@ -2,6 +2,7 @@ import { Subscription } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UploadFileService } from '../upload-file.service';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
+import { filterResponse, uploadProgress } from 'src/app/shared/rxjs-operators';
 
 @Component({
     selector: 'app-upload-file',
@@ -41,28 +42,39 @@ export class UploadFileComponent implements OnInit, OnDestroy {
     onUpload() {
         if (this.files && this.files.size > 0) {
             this.subcription = this.uploadFileService.upload(this.files, '/api/upload')
+                .pipe(
+                    uploadProgress(progress => {
+                        console.log(progress);
+                        this.progress = progress;
+                    }),
+                    filterResponse()
+                )
                 .subscribe({
-                    next: (event: HttpEvent<Object>) => {
+                    next: response => console.log('Upload concluído.'),
+                    // next: (event: HttpEvent<Object>) => {
                         // HttpEventType
-                        console.log('evento:', event);
-                        switch (event.type) {
-                            case HttpEventType.Sent:
-                                console.log('Request has been made!');
-                                break;
-                            case HttpEventType.ResponseHeader:
-                                console.log('Response header has been received!');
-                                break;
-                            case HttpEventType.UploadProgress:
-                                var eventTotal = event.total ? event.total : 0;
-                                this.progress = Math.round(event.loaded / eventTotal * 100);
-                                console.log(`Uploaded! ${this.progress}%`);
-                                break;
-                            case HttpEventType.Response:
-                                console.log('File Upload Successfully!', event.body);
-                                setTimeout(() => {
-                                    this.progress = 0;
-                                }, 1500);
-                        };
+                        // ====== 2a vez fazendo, na minha opinião, a melhor forma é esta. ========
+                        // console.log('evento:', event);
+                        // switch (event.type) {
+                        //     case HttpEventType.Sent:
+                        //         console.log('Request has been made!');
+                        //         break;
+                        //     case HttpEventType.ResponseHeader:
+                        //         console.log('Response header has been received!');
+                        //         break;
+                        //     case HttpEventType.UploadProgress:
+                        //         var eventTotal = event.total ? event.total : 0;
+                        //         this.progress = Math.round(event.loaded / eventTotal * 100);
+                        //         console.log(`Uploaded! ${this.progress}%`);
+                        //         break;
+                        //     case HttpEventType.Response:
+                        //         console.log('File Upload Successfully!', event.body);
+                        //         setTimeout(() => {
+                        //             this.progress = 0;
+                        //         }, 1500);
+                        // };
+
+                        // ======== 1a vez fazendo ===========
                         // if (event.type === HttpEventType.Response) {
                         //     console.log('Upload concluído.');
                         // }
@@ -73,7 +85,7 @@ export class UploadFileComponent implements OnInit, OnDestroy {
                         //         this.progress = percentDone;
                         //     }
                         // }
-                    },
+                    // },
                     error: err => console.log('Ocorreu um erro ao fazer upload. Tente novamente.')
                 });
         }
