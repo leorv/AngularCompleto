@@ -14,7 +14,11 @@ const routes: Routes = [
         path: 'rxjs-poc', loadChildren: () => import('../app/unsubscribe-rxjs/unsubscribe-rxjs.module').then(mod => mod.UnsubscribeRxjsModule)
     },
     {
-        path: '', pathMatch: 'full', redirectTo: 'cursos'
+        path: 'upload',
+        loadChildren: () => import('./upload-file/upload-file.module').then(mod => mod.UploadFileModule)
+    },
+    {
+        path: '', pathMatch: 'full', redirectTo: 'upload'
     }
 ];
 
