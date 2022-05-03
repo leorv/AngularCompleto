@@ -13,6 +13,9 @@ export class UploadFileComponent implements OnInit, OnDestroy {
     subcription: Subscription = new Subscription();
 
     constructor(private uploadFileService: UploadFileService) { }
+    ngOnDestroy(): void {
+        throw new Error('Method not implemented.');
+    }
 
     ngOnInit(): void {
     }

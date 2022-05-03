@@ -19,9 +19,9 @@ app.use(cors(corsOptions));
 const multipartMiddleware = multipart({
     uploadDir: './uploads'
 })
-app.post('/uploads', multipartMiddleware, (req, res) => {
+app.post('/upload', multipartMiddleware, (req, res) => {
     const files = req.files;
-    console.log(files);
+    console.log('POST: dentro do server.');
     res.json({
         message: files
     });
