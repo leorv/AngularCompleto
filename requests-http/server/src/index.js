@@ -21,7 +21,7 @@ const multipartMiddleware = multipart({
 })
 app.post('/upload', multipartMiddleware, (req, res) => {
     const files = req.files;
-    console.log('POST: dentro do server.');
+    console.log('POST: dentro do server.', files);
     res.json({
         message: files
     });

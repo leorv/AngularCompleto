@@ -6,12 +6,12 @@ import { UploadFileComponent } from './upload-file/upload-file.component';
 
 
 @NgModule({
-  declarations: [
-    UploadFileComponent
-  ],
-  imports: [
-    CommonModule,
-    UploadFileRoutingModule
-  ]
+    declarations: [
+        UploadFileComponent
+    ],
+    imports: [
+        CommonModule,
+        UploadFileRoutingModule
+    ]
 })
 export class UploadFileModule { }
