@@ -1,5 +1,5 @@
 const express = require('express');
-const cors = require('cors');
+// const cors = require('cors');
 const bodyParser = require('body-parser');
 const multipart = require('connect-multiparty');
 
@@ -7,14 +7,14 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const corsOptions = {
-    // Se você estiver usando o node, com microserviços, geralmente a gente especifica a origin, 
-    // se você souber o domínio que vai acessar. Como aqui é desenvolvimento, vamos deixar liberado.
-    origin: '*',
-    optionsSuccessStatus: 200
-};
-
-app.use(cors(corsOptions));
+// const corsOptions = {
+//     // Se você estiver usando o node, com microserviços, geralmente a gente especifica a origin, 
+//     // se você souber o domínio que vai acessar. Como aqui é desenvolvimento, vamos deixar liberado.
+//     origin: '*',
+//     optionsSuccessStatus: 200
+// };
+//
+// app.use(cors(corsOptions));
 
 const multipartMiddleware = multipart({
     uploadDir: './uploads'

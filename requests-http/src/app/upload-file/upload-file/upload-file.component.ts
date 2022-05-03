@@ -33,14 +33,13 @@ export class UploadFileComponent implements OnInit, OnDestroy {
         // o elemento input no template e:
         // document.getElementById('customFieldLabel')?.innerHTML = selectedFiles[0].name;
 
-        for (let i = 0; i < selectedFiles.length; i++){
+        for (let i = 0; i < selectedFiles.length; i++) {
             this.files.add(selectedFiles[i]);
         }
-
     }
 
     onUpload() {
-        if (this.files && this.files.size > 0){
+        if (this.files && this.files.size > 0) {
             this.subcription = this.uploadFileService.upload(this.files, 'http://localhost:8000/upload')
                 .subscribe({
                     next: response => console.log('upload concluído.'),
@@ -49,7 +48,7 @@ export class UploadFileComponent implements OnInit, OnDestroy {
         }
     }
 
-    OnDestroy(){
+    OnDestroy() {
         this.subcription.unsubscribe();
     }
 
