@@ -18,7 +18,11 @@ const routes: Routes = [
         loadChildren: () => import('./upload-file/upload-file.module').then(mod => mod.UploadFileModule)
     },
     {
-        path: '', pathMatch: 'full', redirectTo: 'upload'
+        path: 'pesquisa-reativa',
+        loadChildren: () => import('./reactive-search/reactive-search.module').then(mod => mod.ReactiveSearchModule)
+    },
+    {
+        path: '', pathMatch: 'full', redirectTo: 'pesquisa-reativa'
     }
 ];
 
