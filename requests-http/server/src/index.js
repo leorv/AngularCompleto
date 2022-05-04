@@ -27,6 +27,14 @@ app.post('/upload', multipartMiddleware, (req, res) => {
     });
 });
 
+app.get('/downloadExcel', (req, res) => {
+    res.download('./uploads/planilha.xls');
+});
+
+app.get('/downloadPDF', (req, res) => {
+    res.download('./uploads/projeto.pdf');
+});
+
 app.use((err, req, res, next) => res.json({error: err.message}));
 
 
