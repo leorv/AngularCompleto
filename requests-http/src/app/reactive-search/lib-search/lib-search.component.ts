@@ -1,3 +1,5 @@
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { filter } from 'rxjs';
 import { map, tap } from 'rxjs';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
@@ -17,24 +19,41 @@ export class LibSearchComponent implements OnInit {
     results$: Observable<any> = new Observable();
     total: number = 0;
 
+    readonly fields: string = 'name,description,version,alternativeNames,license,homepage,repository,author,originalName';
+
     constructor(
         private searchService: SearchService
     ) { }
 
     ngOnInit(): void {
+        // this.results$ = 
+        this.results$ = this.queryField.valueChanges
+            .pipe(
+                map(value => value.trim()),
+                filter(value => value.length > 1),
+                debounceTime(300),
+                distinctUntilChanged(),
+                tap(value => console.log(value)),
+                switchMap(value => this.searchService.getLibs({
+                    search: value,
+                    fields: this.fields
+                })),
+                tap((res: any) => this.total = res.total),
+                map((res: any) => res.results)
+            );
     }
 
-    onSearch(){
-        console.log(this.queryField.value);
+    onSearch() {
+        // console.log(this.queryField.value);
         let value: string = this.queryField.value;
-        const fields: string = 'name,description,version,alternativeNames,license,homepage,repository,author,originalName';
+        // const fields: string = 'name,description,version,alternativeNames,license,homepage,repository,author,originalName';
 
-        if (value && value.trim() != ''){
+        if (value && value.trim() != '') {
             value = value.trim();
 
             const params = {
                 search: value,
-                fields: fields
+                fields: this.fields
             }
 
             // let params = new HttpParams();
@@ -48,7 +67,7 @@ export class LibSearchComponent implements OnInit {
                 );
         }
 
-        
+
     }
 
 }
