@@ -36,4 +36,61 @@ O buildOptimizer é muito importante também para deixar nosso build mais enxuto
 
 Uma recomendação é não usar o ng build --prod, e sim o npm run build. Facilita caso estejamos utilizando uma ferramenta de integração contínua.
 
+## Usando Firebase
 
+### Hosting
+
+- Instalar o Firebase CLI.
+
+```
+npm install -g firebase-tools
+```
+
+```
+firebase login
+```
+
+```
+firebase init
+```
+
+Escolher as funcionalidades que quer habilitar para este projeto. Neste caso apenas o hosting.
+
+Para o diretório público, informar geralmente: dist/{preencher aqui nome do projeto}
+
+Para a pergunta se queremos usar como Single Page Application, resposta: Sim.
+
+Ele vai gerar o .firebaserc e firebase.json.
+
+Depois de tudo, fazer:
+
+```
+firebase deploy
+```
+
+## Deploy no Firebase usando Angular CLI
+
+A partir da versão 8.3 do Angular CLI, foi adicionado um comando novo, o ng deploy.
+
+Onde através destes dois comandos:
+
+```
+ng add @angular/fire
+ng deploy
+```
+
+A gente faz tudo do tópico anterior por meio destes comandos.
+
+Além disso, o ng add @angular/fire adiciona o fire no nosso projeto Angular.
+
+Então caso você queira usar o RealTimeDatabase do Firebase no Angular, já tem todos os comando também.
+
+https://angular.io/guide/deployment
+
+Lembrando que deve-se ter o firebase CLI instalado no seu computador, e precisa fazer também o firebase login.
+
+O firebase CLI sempre precisa ser a última versão, pra evitar qualquer erro.
+
+Qualquer coisa remova todos os arquivos firebase de antes e crie/atualize novamente com o firebase CLI.
+
+O mesmo feito para o firebase pode ser feito para o Azure, Netlify, etc. Somente mudando o comando do ng add, conforme documentação.
