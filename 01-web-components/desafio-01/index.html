@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal de Notícias Galáticas</title>
     <link rel="stylesheet" href="./styles/card.css">
-    <script src="./src/components/CardNews.js"></script>
+    <script src="./src/components/CardNews.js" defer></script>
     <script src="./src/components/TituloDinamico.js" defer></script>
 </head>
 <body>
@@ -25,6 +25,12 @@
     <titulo-dinamico titulo="urgente"></titulo-dinamico>
     <titulo-dinamico titulo="Leonardo"></titulo-dinamico>
     <titulo-dinamico titulo="Marla e Kipa"></titulo-dinamico>
-    <card-news></card-news>
+    <card-news
+        autor="Leonardo Ruoso Vendramini"
+        title="Dart Vader contrata devs"
+        link-url="#"
+        content="Dart Vader procura devs que sabem trabalhar com web components."
+        photo="assets/dart-vader.jpg"
+    ></card-news>
 </body>
 </html>
