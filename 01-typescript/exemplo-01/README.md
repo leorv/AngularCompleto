@@ -16,3 +16,16 @@ Então, é só descomentar a propriedade rootDir e indicar o caminho, que geralm
 
 Outra propriedade interessante é outDir, que será a pasta de saída dos arquivos. Geralmente se usa ./build.
 
+## Script para execução
+
+Para automatizar o processo de conversão e execução, dentro do package.json existe uma seção de script.
+
+```
+"scripts": {
+    "start": "npx tsc && node build/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+```
+
+Para executar isso `npm run start`.
+
