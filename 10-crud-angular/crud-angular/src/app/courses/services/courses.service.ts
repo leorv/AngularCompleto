@@ -10,7 +10,7 @@ import { delay, first, Observable, take, tap } from 'rxjs';
 })
 export class CoursesService {
 
-    private readonly API: string = '/assets/courses.json';
+    private readonly API: string = '/assets/corses.json';
 
     constructor(private http: HttpClient) { }
 
@@ -24,7 +24,7 @@ export class CoursesService {
                 // take(1), poderíamos utilizar ele também.
                 
                 // Um delay apenas para testarmos o css
-                delay(15000),
+                delay(2000),
                 tap(courses => console.log(courses))
             );
     }
